@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import Form from './Form';
 
 
 function Index() {
   // let body = document.getElementsByTagName("body");
-  const [showPanel, setShowPanel] = useState(false);
-  const [showInverter, setShowInverter] = useState(false);
-  const [showBattery, setShowBattery] = useState(false);
-
   const[itemRemove, setItemRemove] = useState(true);
   const [currentDragId, setCurrentDragId] = useState("");
   const [currentRemoveDragId, setCurrentRemoveDragId] = useState("");
 
-  // const[dropDepth, setDropDepth] = useState(0)
+  const[showForm, setShowForm] = useState(false)
 
   const [panelCounter, setPanelCounter] = useState(0);
   const [inverterCounter, setInverterCounter] = useState(0);
   const [batteryCounter, setBatteryCounter] = useState(0);
-
-//   useEffect(() => {
-//     if(dropDepth <= 1 && mouseLeave){
-//       console.log("Dropdepth less than or equal to 1");
-//     }
-//  }, [dropDepth]);
 
   const handleDragStart = (e) => {
     setCurrentDragId(e.target.getAttribute("data-id"));
@@ -82,15 +73,15 @@ function Index() {
     // console.log(e.target);
     if(!itemRemove){
       if(currentDragId == "panel"){
-        setShowPanel(true);
+        // setShowPanel(true);
         setPanelCounter(panelCounter + 1);
       }
       if(currentDragId == "battery"){
-        setShowBattery(true);
+        // setShowBattery(true);
         setBatteryCounter(batteryCounter + 1);
       }
       if(currentDragId == "inverter"){
-        setShowInverter(true);
+        // setShowInverter(true);
         setInverterCounter(inverterCounter + 1);
       }
     }
@@ -107,18 +98,29 @@ function Index() {
     setInverterCounter(inverterCounter + i);
   }
 
+  const handleClick = () => {
+    if((panelCounter + inverterCounter + batteryCounter) > 0 ){
+      setShowForm(true);
+    }
+    else{
+      alert("You need to pick at least one component to Request A Quote")
+    }
+  }
+  const close = () => {
+    setShowForm(false);
+  }
+
   const handleDragEnd = () => {
     // console.log("dragging Ends.....")
   }
   return (
   
-    <div className="w-full">
-      <header className='my-10 w-full'>
-        <div className="w-56 text-center mx-auto">
-          <img className='w-full' src="/img/luminous.png" alt="Luminous Logo" />
-          <span className="uppercase mx-auto text-xl text-center">product builder</span>
-        </div>
-      </header>
+    <div className="w-full mt-10">
+      {
+        showForm &&
+        <Form close={close} counters={{panelCounter, inverterCounter, batteryCounter}} />
+      }
+
       <main>
         <div className="flex flex-wrap ">
           <div className="drag-items w-full lg:w-1/3 px-10">
@@ -225,6 +227,11 @@ function Index() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <button 
+            onClick={handleClick}
+            className="bg-blue-600 w-48 rounded-lg shadow-xl border text-white p-2">Request A Quote</button>
         </div>
       </main>
     </div>
