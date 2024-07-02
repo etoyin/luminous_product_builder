@@ -69,12 +69,13 @@ function Form(props) {
             emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
             .then((result) => {
                 console.log(result.text);
-                alert('Message Sent Successfully')
+                alert('Message Sent Successfully');
+                props.close();
             }, (error) => {
                 console.log(error.text);
                 alert('Something went wrong!')
             });
-            props.close()
+            
             // console.log("kkkkkkkk");
         }
         else{
