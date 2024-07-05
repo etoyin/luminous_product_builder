@@ -14,13 +14,22 @@ function Form(props) {
     const [data, setData] = useState({
         name: "",
         email: "",
-        address: "",
+        
+        reach: "",
+        phone:"",
+        time: "",
+        heard: "",
+        
         capacity: `${capa}kVA`,
         power_gen: `${gen}kWp`,
         backup: `${batt}hours`,
-        f_error: false,
+        n_error: false,
         email_error: false,
-        loc_error: false
+
+        heard_error: false,
+        reach_error: false,
+        phone_error: false,
+        time_error: false
     })
 
     const handleChange = (event) => {
@@ -28,20 +37,36 @@ function Form(props) {
         setData({...data, [event.target.name]: event.target.value});
         console.log(data);
     }
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         // alert(data);
-        if( data.name.length > 0 && data.email.length > 0 && data.address.length > 0 ){
-            setData({...data, fn_error: false, ln_error: false, loc_error: false});
+        if( data.name.length > 0 && data.email.length > 0 && data.phone.length > 0 
+            && data.heard.length > 0 && data.time.length > 0 && data.reach.length > 0
+        ){
+            setData({...data, n_error: false, 
+                email_error: false, 
+                heard_error: false, 
+                reach_error: false,
+                time_error: false,
+                phone_error: false
+            });
 
             
-            let message = `I would like to request the following quote \n 
-                            System Capacity: ${data.capacity} \n
-                            Daily Power Generation: ${data.power_gen} \n
-                            Backup Time: ${data.backup} \n
+            let message = `I would like to request the following quote\n 
+                            Hybrid Inverter Capacity: ${data.capacity}\n
+                            Solar Panel Capacity: ${data.power_gen}\n
+                            Battery Backup Capacity: ${data.backup}\n
                             
-                            My Location: ${data.address}`
-            
+                            Below are my contact details: 
+                            WhatsApp Phone number: ${data.phone}.\n
+                            I will like to be contacted ${data.phone} at ${data.time}
+                            
+                            I heard about Arnergy through ${data.heard}`
+        
             var form = document.createElement("form");
             var FN = document.createElement("input");
             FN.setAttribute("name", "user_name");
@@ -79,10 +104,16 @@ function Form(props) {
             // console.log("kkkkkkkk");
         }
         else{
+            let email_valid = validateEmail(data.email);
+            console.log(email_valid);
             setData({...data, 
-                fn_error: (data.first_name.length < 1),
-                ln_error: (data.last_name.length < 1),
-                loc_error: (data.address.length < 1)
+                n_error: (data.name.length < 1),
+                // loc_error: (data.address.length < 1),
+                email_error: (!email_valid), 
+                heard_error: (data.heard.length < 1), 
+                reach_error: (data.reach.length < 1),
+                time_error: (data.time.length < 1),
+                phone_error: (data.phone.length < 1)
             })
             
             // if(data.address.length < 1){
@@ -99,12 +130,12 @@ function Form(props) {
     }
   
     return (
-    <div className='bg-black z-10 bg-opacity-50 flex justify-center items-center fixed left-0 top-0 w-screen h-screen'>
-        <div className="w-full bg-white rounded-lg border shadow-lg sm:w-9/12 md:w-7/12 lg:w-6/12">
+    <div className='bg-black z-10 overflow-y-auto bg-opacity-50 md:flex md:justify-center md:items-center fixed left-0 top-0 w-full h-full'>
+        <div className="w-full mx-auto bg-white rounded-lg border shadow-lg sm:w-9/12 md:w-7/12 lg:w-6/12">
             <div onClick={close} className="cursor-pointer text-right"><i className="las la-times text-3xl"></i></div>
             <div className="flex justify-center p-5 items-center">
                 <div class="w-full">
-                    <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                             Name
@@ -113,7 +144,7 @@ function Form(props) {
                             onChange={handleChange}
                             value={data.name}
                             name="name"
-                            className={`${data.n_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`} id="grid-first-name" type="text" />
+                            className={`${data.n_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white`} id="grid-first-name" type="text" />
                         {
                             data.n_error &&
                             <p class="text-red-500 text-xs italic">Please fill out this field.</p>
@@ -130,31 +161,64 @@ function Form(props) {
                                 className={`${data.email_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} id="grid-email" />
                             {
                                 data.email_error &&
-                                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                                <p class="text-red-500 text-xs italic">Please fill in a valid email.</p>
                             }
                         </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                                Location
+                    <div class="flex flex-wrap -mx-3 mb-2">
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                            <label class="flex items-center uppercase tracking-wide h-10 text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                WhatsApp Number <i className="ml-2 text-lg las la-bolt"></i>
                             </label>
                             <input 
                                 onChange={handleChange}
-                                value={data.address}
-                                name="address"
-                                autoComplete='address'
-                                class={`${data.loc_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} type="text" />
+                                value={data.phone}
+                                name="phone"
+                                class={`${data.phone_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} id="grid-city" type="number" placeholder=""/>
                             {
-                                data.loc_error &&
+                                data.phone_error &&
+                                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                            }
+                        </div>
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                            <label class="flex items-center uppercase tracking-wide h-10 text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                What time will you like us to call you? <i className="ml-2 text-lg las la-solar-panel"></i>
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    value={data.time}
+                                    onChange={handleChange}
+                                    name="time"
+                                    class={`${data.time_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} id="grid-city" type="time" placeholder=""/>
+                            {
+                                data.time_error &&
+                                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                            }
+                            </div>
+                        </div>
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                                How will you like us to reach you? <i className="ml-2 text-lg las la-battery-half"></i>
+                            </label>
+                            <select 
+                                value={data.reach}
+                                onChange={handleChange}
+                                name="reach"
+                                className={`${data.phone_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} id="grid-zip">
+                                    <option value="">Select an option</option>
+                                    <option value="WhatsApp">Via WhatsApp</option>
+                                    <option value="Phone Call">Via Phone Call</option>
+                            </select>
+                            {
+                                data.reach_error &&
                                 <p class="text-red-500 text-xs italic">Please fill out this field.</p>
                             }
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
-                            <label class="flex items-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                                System Capacity <i className="ml-2 text-lg las la-bolt"></i>
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                Hybrid Inverter Capacity <i className="ml-2 text-lg las la-bolt"></i>
                             </label>
                             <input 
                                 disabled={true}
@@ -162,9 +226,9 @@ function Form(props) {
                                 name="capacity"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque"/>
                         </div>
-                        <div class="w-full md:w-5/12 px-3 mb-6 md:mb-0">
-                            <label class="flex items-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                Daily Power Generation <i className="ml-2 text-lg las la-solar-panel"></i>
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                Solar Panel Capacity <i className="ml-2 text-lg las la-solar-panel"></i>
                             </label>
                             <div class="relative">
                                 <input 
@@ -174,15 +238,40 @@ function Form(props) {
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque"/>
                             </div>
                         </div>
-                        <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                        <label class="flex items-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                            Backup Time <i className="ml-2 text-lg las la-battery-half"></i>
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                        <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                            Battery Backup Capacity <i className="ml-2 text-lg las la-battery-half"></i>
                         </label>
                         <input 
                             value={data.backup}
                             name="backup"
                             disabled={true}
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210"/>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                                How did you hear about us?
+                            </label>
+                            <select 
+                                onChange={handleChange}
+                                value={data.heard}
+                                name="heard"
+                                autoComplete='address'
+                                class={`${data.heard_error ? "border-red-500": ""} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} type="text">
+                                    <option value="">Select an option</option>
+                                    <option value="Social Media">Social Media</option>
+                                    <option value="Through a friend">Through a Friend</option>
+                                    <option value="Flyers">Flyers</option>
+                                    <option value="Billboard Ad">Billboard advert</option>
+                                    <option value="Television advert">Television advert</option>
+                                    <option value="other">Other</option>
+                            </select>
+                            {
+                                data.heard_error &&
+                                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                            }
                         </div>
                     </div>
                     <div className="flex justify-center">

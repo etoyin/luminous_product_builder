@@ -136,20 +136,22 @@ function Index() {
                   </button>
                   <div className="w-24">
                     <img src="img/panel.png" onDragEnd={handleDragEnd} onDragStart={handleDragStart} data-id="panel" className='w-full' alt="" srcset="" draggable="true"/>
+                    <p className="text-center text-xs font-semibold">545W Solar Panel</p>
                   </div>
                   <button
                     onClick={() => {managePanel(1)}} 
                     className="border cursor-pointer border-gray-300 text-center"><i className="text-lg las la-plus"></i>
                   </button>
                 </div>
-                <div className="w-32 md:w-40 h-40 flex justify-between items-center shadow-lg m-2">
+                <div className="w-30 md:w-36 h-40 flex justify-between items-center shadow-lg m-2">
                   <button 
                     onClick={() => {manageInverter(-1)}} 
                     disabled={inverterCounter < 1}
                     className="border border-gray-300 text-center"><i className="text-lg las la-minus"></i>
                   </button>
                   <div className="w-24">
-                    <img src="img/inverter.png" onDragStart={handleDragStart} data-id="inverter" className='w-full' alt="" srcset="" draggable="true"/>
+                    <img src="img/inverter2.png" onDragStart={handleDragStart} data-id="inverter" className='w-full' alt="" srcset="" draggable="true"/>
+                    <p className="text-center relative -top-2 text-xs font-semibold">Arnergy 5kVA Inverter</p>
                   </div>
                   <button 
                     onClick={() => {manageInverter(1)}}
@@ -162,7 +164,8 @@ function Index() {
                     disabled={batteryCounter < 1}
                     className="border cursor-pointer border-gray-300 text-center"><i className="text-lg las la-minus"></i></button>
                   <div className="w-24">
-                    <img src="img/battery.png" onDragStart={handleDragStart} data-id="battery" className='w-full' alt="" srcset="" draggable="true"/>
+                    <img src="img/battery2.png" onDragStart={handleDragStart} data-id="battery" className='w-full' alt="" srcset="" draggable="true"/>
+                    <p className="text-center text-xs font-semibold">Arnergy 5.12kWh Battery</p>
                   </div>
                   <button 
                     onClick={() => {managebattery(1)}}
@@ -182,11 +185,13 @@ function Index() {
               {
                 inverterCounter > 0 && 
                 <>
-                  <p className="relative text-4xl -right-32 -top-10 z-5">x{inverterCounter}</p>
-                  <img src="img/inverter.png" 
+                  <p className="relative text-sm -right-32 font-semibold -top-10 sm:-top-20 z-5">
+                  5kVAX{inverterCounter}
+                  </p>
+                  <img src="img/inverter2.png" 
                     data-id="inverter" 
                     onDragStart={handleDropDragStart}
-                    className={`w-24 sm:w-36 relative top-16 ${panelCounter > 0 ? 'left-20': ""} z-5`} alt="" srcset="" />
+                    className={`w-24 sm:w-32 relative top-16 ${panelCounter > 0 ? 'left-20': ""} z-5`} alt="" srcset="" />
                 </>
               }
               {
@@ -195,43 +200,80 @@ function Index() {
                   <img src="img/panel.png" 
                     data-id="panel" 
                     onDragStart={handleDropDragStart}
-                    className='relative left-5 w-48 sm:w-56' alt="" srcset="" />
-                  <p className="relative text-4xl -top-28 -left-10 z-5">x{panelCounter}</p>
+                    className='relative left-5 top-2 w-48 sm:w-56' alt="" srcset="" />
+                  <p className="relative text-sm font-semibold break-keep -top-28 -left-10 z-5">
+                    545WX{panelCounter}
+                  </p>
                 </>
               }
               {
                 batteryCounter > 0 &&
                 <>
-                  <img src="img/battery.png" 
+                  <img src="img/battery2.png" 
                     data-id="battery" 
                     onDragStart={handleDropDragStart}
-                    className={`w-24 sm:w-36 relative top-20 ${panelCounter > 0 ? "right-24": ""}`} alt="" srcset=""/>
-                    <p className="relative text-4xl -left-32 z-5">x{batteryCounter}</p>
+                    className={`w-20 sm:w-28 relative top-20 ${panelCounter > 0 ? "right-24": ""}`} alt="" srcset=""/>
+                    <p className={`relative text-sm font-semibold z-5 ${panelCounter > 0 ? "-left-32": "-left-24"}`}>
+                      5.12kWhX{batteryCounter}
+                    </p>
                 </>
               }
             </div>
-            <div className="result-items flex items-center p-5 w-full md:w-5/12">
-              <div className="bg-blue-200 p-2 rounded-lg">
-                <div className="sys text-lg ">
-                  <span className="font-semibold">System Capacity:</span>
+            <div className="result-items p-5 w-full md:w-5/12">
+              <div className="p-2 rounded-lg ">
+                <div className="sys my-2 text-base ">
+                  <span className="">Hybrid Inverter Capacity:</span>
                   <span className="text-blue-600 font-semibold"> {inverterCounter * 5}kVA</span>
                 </div>
-                <div className="sys text-lg">
-                  <span className="font-semibold ">Daily power generation:</span>
-                  <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 3.5 * 545/1000) + Number.EPSILON) * 100) / 100}kWp</span>
+                <div className="sys my-2 text-base">
+                  <span className=" ">Solar Panel Capactiy:</span>
+                  <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 545/1000) + Number.EPSILON) * 100) / 100}kWp</span>
                 </div>
-                <div className="sys text-lg">
-                  <span className="font-semibold ">Backup time (with 1kW load):</span>
+                <div className="sys my-2 text-base">
+                  <span className=" ">Battery Backup Capacity:</span>
                   <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12)}hours</span>
                 </div>
               </div>
+              {/* <div className='w-full bg-black h-1' /> */}
+              <hr className='my-2'/>
+              <div className="p-2 rounded-lg">
+                <div className="sys my-2 text-base ">
+                  <span className="">Max. Load You Can Connect:</span>
+                  <span className="text-blue-600 font-semibold"> {inverterCounter * 5 * 0.8}kVA</span>
+                </div>
+                <div className="sys my-2 text-base">
+                  <span className=" ">Your Daily Power Generation (from PV):</span>
+                  <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 3.5 * 0.75 * 545/1000) + Number.EPSILON) * 100) / 100}kW/Day</span>
+                </div>
+                <div className="sys my-2 text-base">
+                  <span className="">Your Backup time (with 1kW load):</span>
+                  <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12 / 1)}hours</span>
+                </div>
+                <div className="sys my-2 text-base">
+                  <span className="">Your Backup time (with 3kW load):</span>
+                  <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12 / 3)}hours</span>
+                </div>
+                <div className="sys my-2 text-base">
+                  <span className="">Your Backup time (with 5kW load):</span>
+                  <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12 / 5)}hours</span>
+                </div>
+                <div className="sys my-2 text-base">
+                  <span className="">Your Backup time (with 10kW load):</span>
+                  <span className="text-red-600 font-semibold"> {
+                    (batteryCounter * 5.12 / 10) >= 1 ?
+                    Math.round(batteryCounter * 5.12 / 10) + "hours"
+                    :
+                    Math.round(batteryCounter * 5.12 * 60 / 10) + "mins"
+                    }</span>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <button 
+                  onClick={handleClick}
+                  className="bg-blue-600 w-48 rounded-lg shadow-xl border text-white p-2">Request A Quote</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex justify-center">
-          <button 
-            onClick={handleClick}
-            className="bg-blue-600 w-48 rounded-lg shadow-xl border text-white p-2">Request A Quote</button>
         </div>
       </main>
     </div>
