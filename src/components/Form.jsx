@@ -56,7 +56,7 @@ function Form(props) {
             });
 
             
-            let message = `I would like to request the following quote\n 
+            let message = `I would like to request the following quote 
                             Hybrid Inverter Capacity: ${data.capacity}\n
                             Solar Panel Capacity: ${data.power_gen}\n
                             Battery Backup Capacity: ${data.backup}\n
@@ -168,7 +168,7 @@ function Form(props) {
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
                             <label class="flex items-center uppercase tracking-wide h-10 text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                                WhatsApp Number <i className="ml-2 text-lg las la-bolt"></i>
+                                WhatsApp Number
                             </label>
                             <input 
                                 onChange={handleChange}
@@ -182,7 +182,7 @@ function Form(props) {
                         </div>
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
                             <label class="flex items-center uppercase tracking-wide h-10 text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                What time will you like us to call you? <i className="ml-2 text-lg las la-solar-panel"></i>
+                                What time will you like us to call you?
                             </label>
                             <div class="relative">
                                 <input 
@@ -198,7 +198,7 @@ function Form(props) {
                         </div>
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
                             <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                                How will you like us to reach you? <i className="ml-2 text-lg las la-battery-half"></i>
+                                How will you like us to reach you?
                             </label>
                             <select 
                                 value={data.reach}

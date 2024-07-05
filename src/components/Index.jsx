@@ -186,7 +186,7 @@ function Index() {
                 inverterCounter > 0 && 
                 <>
                   <p className="relative text-sm -right-32 font-semibold -top-10 sm:-top-20 z-5">
-                  5kVAX{inverterCounter}
+                    5kVA X <span className='text-red-600'>{inverterCounter}</span>
                   </p>
                   <img src="img/inverter2.png" 
                     data-id="inverter" 
@@ -202,7 +202,7 @@ function Index() {
                     onDragStart={handleDropDragStart}
                     className='relative left-5 top-2 w-48 sm:w-56' alt="" srcset="" />
                   <p className="relative text-sm font-semibold break-keep -top-28 -left-10 z-5">
-                    545WX{panelCounter}
+                    545W X <span className='text-red-600'>{panelCounter}</span>
                   </p>
                 </>
               }
@@ -214,7 +214,7 @@ function Index() {
                     onDragStart={handleDropDragStart}
                     className={`w-20 sm:w-28 relative top-20 ${panelCounter > 0 ? "right-24": ""}`} alt="" srcset=""/>
                     <p className={`relative text-sm font-semibold z-5 ${panelCounter > 0 ? "-left-32": "-left-24"}`}>
-                      5.12kWhX{batteryCounter}
+                      5.12kWh X <span className='text-red-600'>{batteryCounter}</span>
                     </p>
                 </>
               }
