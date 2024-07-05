@@ -63,7 +63,7 @@ function Form(props) {
                             
                             Below are my contact details: 
                             WhatsApp Phone number: ${data.phone}.\n
-                            I will like to be contacted ${data.phone} at ${data.time}
+                            I will like to be contacted ${data.reach} at ${data.time}
                             
                             I heard about Arnergy through ${data.heard}`
         
