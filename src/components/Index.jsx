@@ -135,7 +135,7 @@ function Index() {
                       <i className="text-lg las la-minus"></i>
                   </button>
                   <div className="w-24">
-                    <img src="img/panel.png" onDragEnd={handleDragEnd} onDragStart={handleDragStart} data-id="panel" className='w-full' alt="" srcset="" draggable="true"/>
+                    <img src="img/panel.png" onDragEnd={handleDragEnd} onDragStart={handleDragStart} data-id="panel" className='w-full h-32' alt="" srcset="" draggable="true"/>
                     <p className="text-center text-xs font-semibold">545W Solar Panel</p>
                   </div>
                   <button
@@ -150,7 +150,7 @@ function Index() {
                     className="border border-gray-300 text-center"><i className="text-lg las la-minus"></i>
                   </button>
                   <div className="w-24">
-                    <img src="img/inverter2.png" onDragStart={handleDragStart} data-id="inverter" className='w-full' alt="" srcset="" draggable="true"/>
+                    <img src="img/inverter2.png" onDragStart={handleDragStart} data-id="inverter" className='w-full h-32' alt="" srcset="" draggable="true"/>
                     <p className="text-center relative -top-2 text-xs font-semibold">Arnergy 5kVA Inverter</p>
                   </div>
                   <button 
@@ -164,7 +164,7 @@ function Index() {
                     disabled={batteryCounter < 1}
                     className="border cursor-pointer border-gray-300 text-center"><i className="text-lg las la-minus"></i></button>
                   <div className="w-24">
-                    <img src="img/battery2.png" onDragStart={handleDragStart} data-id="battery" className='w-full' alt="" srcset="" draggable="true"/>
+                    <img src="img/battery3.png" onDragStart={handleDragStart} data-id="battery" className='w-full' alt="" srcset="" draggable="true"/>
                     <p className="text-center text-xs font-semibold">Arnergy 5.12kWh Battery</p>
                   </div>
                   <button 
@@ -185,13 +185,13 @@ function Index() {
               {
                 inverterCounter > 0 && 
                 <>
-                  <p className="relative text-sm -right-32 font-semibold -top-10 sm:-top-20 z-5">
-                    5kVA X <span className='text-red-600'>{inverterCounter}</span>
+                  <p className="relative text-sm -right-28 font-semibold -top-10 sm:-top-20 z-5">
+                    <span className='text-red-600'>{inverterCounter}</span> X Arnergy Inverter
                   </p>
                   <img src="img/inverter2.png" 
                     data-id="inverter" 
                     onDragStart={handleDropDragStart}
-                    className={`w-24 sm:w-32 relative top-16 ${panelCounter > 0 ? 'left-20': ""} z-5`} alt="" srcset="" />
+                    className={`w-24 sm:w-32 relative top-16 ${panelCounter > 0 ? 'left-12': ""} z-5`} alt="" srcset="" />
                 </>
               }
               {
@@ -200,21 +200,21 @@ function Index() {
                   <img src="img/panel.png" 
                     data-id="panel" 
                     onDragStart={handleDropDragStart}
-                    className='relative left-5 top-2 w-48 sm:w-56' alt="" srcset="" />
-                  <p className="relative text-sm font-semibold break-keep -top-28 -left-10 z-5">
-                    545W X <span className='text-red-600'>{panelCounter}</span>
+                    className='relative left-4 sm:left-2 top-10 w-28 sm:w-32' alt="" srcset="" />
+                  <p className="relative text-sm font-semibold break-keep -top-32 -left-10 z-5">
+                    <span className='text-red-600'>{panelCounter}</span> X Solar Panel
                   </p>
                 </>
               }
               {
                 batteryCounter > 0 &&
                 <>
-                  <img src="img/battery2.png" 
+                  <img src="img/battery3.png" 
                     data-id="battery" 
                     onDragStart={handleDropDragStart}
-                    className={`w-20 sm:w-28 relative top-20 ${panelCounter > 0 ? "right-24": ""}`} alt="" srcset=""/>
-                    <p className={`relative text-sm font-semibold z-5 ${panelCounter > 0 ? "-left-32": "-left-24"}`}>
-                      5.12kWh X <span className='text-red-600'>{batteryCounter}</span>
+                    className={`w-20 sm:w-28 relative top-28 ${panelCounter > 0 ? "right-10": ""}`} alt="" srcset=""/>
+                    <p className={`relative text-sm font-semibold z-5 ${panelCounter > 0 ? "-left-16 sm:-left-28": "-left-10 sm:-left-24 "}`}>
+                      <span className='text-red-600'>{batteryCounter}</span> X Arnergy Battery
                     </p>
                 </>
               }
