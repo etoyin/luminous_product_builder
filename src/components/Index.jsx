@@ -181,7 +181,11 @@ function Index() {
               onDragLeave={e => handleDragLeave(e)}
               data-id="drop-target"
               className="flex justify-center items-center h-96 p-10 w-full md:w-7/12 border border-gray-300 rounded-xl shadow-xl">
-              {/* <p className='text-4xl uppercase text-gray-200'>Drop Items Here</p> */}
+              {
+                  (panelCounter < 0 && inverterCounter <0 && batteryCounter<0) &&
+                  <p className='text-4xl uppercase text-gray-200'>Drop Items Here</p>
+
+              }
               {
                 inverterCounter > 0 && 
                 <>

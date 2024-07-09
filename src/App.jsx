@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import './App.css';
 import Index from './components/Index';
 import Calculator from './components/Calculator';
+// import Iframe from './components/Iframe';
 // import Index from './components/Index';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
          <Route path='/' element={<Index/>} />
          <Route path='/calculator' element={<Calculator/>} />
+         {/* <Route path='/iframe' element={<Iframe/>} /> */}
          {/* <Route path='/about' element={<About/>} />
          <Route path='/contact' element={<Contact/>} /> */}
        </Routes>
