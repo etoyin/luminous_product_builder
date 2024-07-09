@@ -190,7 +190,7 @@ function Index() {
                 inverterCounter > 0 && 
                 <>
                   <p className="relative text-sm -right-28 font-semibold -top-10 sm:-top-20 z-5">
-                    <span className='text-red-600'>{inverterCounter}</span> X Arnergy Inverter
+                    <span className='text-red-600'>{inverterCounter}</span> X 5kVA Inverter
                   </p>
                   <img src="img/inverter2.png" 
                     data-id="inverter" 
@@ -206,7 +206,7 @@ function Index() {
                     onDragStart={handleDropDragStart}
                     className='relative left-4 sm:left-2 top-10 w-28 sm:w-32' alt="" srcset="" />
                   <p className="relative text-sm font-semibold break-keep -top-32 -left-10 z-5">
-                    <span className='text-red-600'>{panelCounter}</span> X Solar Panel
+                    <span className='text-red-600'>{panelCounter}</span> X 545W Solar Panel
                   </p>
                 </>
               }
@@ -218,36 +218,36 @@ function Index() {
                     onDragStart={handleDropDragStart}
                     className={`w-20 sm:w-28 relative top-28 ${panelCounter > 0 ? "right-10": ""}`} alt="" srcset=""/>
                     <p className={`relative text-sm font-semibold z-5 ${panelCounter > 0 ? "-left-16 sm:-left-28": "-left-10 sm:-left-24 "}`}>
-                      <span className='text-red-600'>{batteryCounter}</span> X Arnergy Battery
+                      <span className='text-red-600'>{batteryCounter}</span> X 5.12kWh Battery
                     </p>
                 </>
               }
             </div>
             <div className="result-items p-5 w-full md:w-5/12">
               <div className="p-2 rounded-lg ">
+                <div className="sys my-2 text-base">
+                  <span className=" ">Solar Panel Capactiy:</span>
+                  <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 545/1000) + Number.EPSILON) * 100) / 100}kWp</span>
+                </div>
                 <div className="sys my-2 text-base ">
                   <span className="">Hybrid Inverter Capacity:</span>
                   <span className="text-blue-600 font-semibold"> {inverterCounter * 5}kVA</span>
                 </div>
                 <div className="sys my-2 text-base">
-                  <span className=" ">Solar Panel Capactiy:</span>
-                  <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 545/1000) + Number.EPSILON) * 100) / 100}kWp</span>
-                </div>
-                <div className="sys my-2 text-base">
                   <span className=" ">Battery Backup Capacity:</span>
-                  <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12)}hours</span>
+                  <span className="text-red-600 font-semibold"> {Math.round(batteryCounter * 5.12)}kWh</span>
                 </div>
               </div>
               {/* <div className='w-full bg-black h-1' /> */}
               <hr className='my-2'/>
               <div className="p-2 rounded-lg">
-                <div className="sys my-2 text-base ">
-                  <span className="">Max. Load You Can Connect:</span>
-                  <span className="text-blue-600 font-semibold"> {inverterCounter * 5 * 0.8}kVA</span>
-                </div>
                 <div className="sys my-2 text-base">
                   <span className=" ">Your Daily Power Generation (from PV):</span>
                   <span className="text-green-600 font-semibold"> {Math.round(((panelCounter * 3.5 * 0.75 * 545/1000) + Number.EPSILON) * 100) / 100}kW/Day</span>
+                </div>
+                <div className="sys my-2 text-base ">
+                  <span className="">Max. Load You Can Connect:</span>
+                  <span className="text-blue-600 font-semibold"> {inverterCounter * 5 * 0.8}kW</span>
                 </div>
                 <div className="sys my-2 text-base">
                   <span className="">Your Backup time (with 1kW load):</span>
