@@ -125,7 +125,7 @@ function Index() {
         <div className="flex flex-wrap ">
           <div className="drag-items w-full lg:w-1/3 px-10">
               <h2 className="text-2xl uppercase mb-2 font-semibold">Our products</h2>
-              <p className="text-sm">You can choose for the product below or combine any two or more products and see the configuration</p>
+              <p className="text-sm">You can choose from the products below or combine any two or more products and see the configuration</p>
               <div className=" flex flex-wrap sm:flex-no-wrap lg:flex-wrap  ">
                 <div className="w-32 md:w-40 h-40 p-1 flex justify-between items-center shadow-lg m-2">
                   <button 
@@ -171,6 +171,11 @@ function Index() {
                     onClick={() => {managebattery(1)}}
                     className="border cursor-pointer border-gray-300 text-center"><i className="text-lg las la-plus"></i></button>
                 </div>
+                <div className="text-center cursor-pointer" onClick={() => {
+                  setBatteryCounter(0);
+                  setInverterCounter(0);
+                  setPanelCounter(0);
+                }}><i className="las la-redo-alt mr-2"></i>Reset</div>
               </div>
           </div>
           <div className="flex flex-wrap w-full lg:w-2/3 p-5">
