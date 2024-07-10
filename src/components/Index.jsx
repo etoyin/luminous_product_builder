@@ -171,7 +171,7 @@ function Index() {
                     onClick={() => {managebattery(1)}}
                     className="border cursor-pointer border-gray-300 text-center"><i className="text-lg las la-plus"></i></button>
                 </div>
-                <div className="text-center cursor-pointer flex justify-center items-center" onClick={() => {
+                <div className="text-center w-32 md:w-40 h-40 cursor-pointer flex justify-center items-center" onClick={() => {
                   setBatteryCounter(0);
                   setInverterCounter(0);
                   setPanelCounter(0);
