@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Ratings from './data';
-import { recommendPanel } from './conditions';
+import { recommendBattery, recommendInverter, recommendPanel } from './conditions';
 
 function Calculator() {
     console.log(Ratings);
@@ -233,7 +233,7 @@ function Calculator() {
                             max="24"
                             className="ml-3 h-8 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                     </p>
-                    <div className="my-3 font-semibold">
+                    <div className="my-1 font-semibold">
                         <span className="text-[#fe7029] mr-3 text-center text-sm">
                             Daily Power Generation Needed:
                         </span>
@@ -243,7 +243,7 @@ function Calculator() {
                             Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100} kW
                         </span>
                     </div>
-                    <div className="my-3 font-semibold">
+                    <div className="my-1 font-semibold">
                         <span className="text-[#fe7029] mr-3 text-center text-sm">
                             Solar Battery Required :
                         </span>
@@ -251,7 +251,7 @@ function Calculator() {
                             {isNaN(appData.night_power)? "0" : appData.night_power} kW
                         </span>
                     </div>
-                    <div className="my-3 font-semibold">
+                    <div className="my-1 font-semibold">
                         <span className="text-[#fe7029] mr-3 text-center text-sm">
                             Expected Maximum Load :
                         </span>
@@ -268,10 +268,29 @@ function Calculator() {
                     <p className="text-sm">
                         After reviewing your entry and need, here is a suitable solar system to cover all your energy needs.
                     </p>
-                    <div className="my-3 font-semibold">
+                    <div className="my-1 font-semibold">
+                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+                            Recommend: {
+                                recommendPanel(appData.daily_power)
+                            }
+                        </span>
+                    </div>
+                    {
+                        appData.night_power > 1.5 &&
+                        <div className="my-1 font-semibold">
+                            <span className="text-[#fe7029] mr-3 text-center text-sm">
+                                Recommend: {
+                                    // console.log(appData.load)
+                                    recommendInverter(appData.load)
+                                }
+                            </span>
+                        </div>
+                    }
+                    <div className="my-1 font-semibold">
                         <span className="text-[#fe7029] mr-3 text-center text-sm">
                             {
-                                recommendPanel(appData.daily_power)
+                                // console.log(appData.load)
+                                recommendBattery(appData.night_power)
                             }
                         </span>
                     </div>
