@@ -7,6 +7,7 @@ function Calculator() {
     const [rerenderMonitor ,setRerenderMonitor] = useState(true);
     const [appData, setAppData] = useState({
         grid_time: 0,
+        night_power: 0,
         load: 0,
         fields: [
             {
@@ -276,7 +277,10 @@ function Calculator() {
                         </span>
                     </div>
                     {
-                        appData.night_power > 1.5 &&
+                        console.log(appData.night_power)
+                    }
+                    {
+                        (appData.night_power === 0 || appData.night_power > 1.5) &&
                         <div className="my-1 font-semibold">
                             <span className="text-[#fe7029] mr-3 text-center text-sm">
                                 Recommend: {
