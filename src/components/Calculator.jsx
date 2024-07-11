@@ -4,6 +4,7 @@ import { recommendPanel } from './conditions';
 
 function Calculator() {
     console.log(Ratings);
+    const [rerenderMonitor ,setRerenderMonitor] = useState(true);
     const [appData, setAppData] = useState({
         grid_time: 0,
         load: 0,
@@ -46,7 +47,7 @@ function Calculator() {
             daily_power: Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100,
             night_power: Math.round((((load / 1000) * (night_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100
         })
-    }, [appData])
+    }, [rerenderMonitor])
     
 
     const handleChange = (i, e) => {
@@ -74,6 +75,7 @@ function Calculator() {
                 fields:fields
             });
         }
+        setRerenderMonitor(!rerenderMonitor);
     }
     const handleGridChange = (e) => {
         
@@ -81,6 +83,8 @@ function Calculator() {
             ...appData,
             grid_time: e.target.value
         });
+
+        setRerenderMonitor(!rerenderMonitor);
         
     }
     const handleDeleteInput = (index, e) => {
@@ -128,7 +132,7 @@ function Calculator() {
                                         name='appliance'
                                         value={each.appliance}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected>Choose an Appliance</option>
+                                        <option value="">Choose an Appliance</option>
                                         {Ratings.ratings.map((option, j) => {
                                             return (
                                                 <option key={j} value={option.name}>{option.name}</option>
