@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Ratings from './data'
+import Ratings from './data';
+import { recommendPanel } from './conditions';
 
 function Calculator() {
     console.log(Ratings);
     const [appData, setAppData] = useState({
+        grid_time: 0,
         load: 0,
         fields: [
             {
@@ -58,20 +60,28 @@ function Calculator() {
             fields:fields
         });
         if(e.target.name == 'appliance'){
-            let filtered = Ratings.ratings.filter((each) => {
+            let filteblue = Ratings.ratings.filter((each) => {
                 return e.target.value == each.name;
             });
 
             let fields = appData.fields
             fields[i] = {
                 ...appData.fields[i],
-                load: filtered[0].value,
+                load: filteblue[0].value,
             };
             setAppData({
                 ...appData,
                 fields:fields
             });
         }
+    }
+    const handleGridChange = (e) => {
+        
+        setAppData({
+            ...appData,
+            grid_time: e.target.value
+        });
+        
     }
     const handleDeleteInput = (index, e) => {
         e.preventDefault();
@@ -98,10 +108,10 @@ function Calculator() {
     };
   return (
     <div>
-      <div className="p-4 sm:p-10">
+      <div className="p-4 sm:p-10 font-quicksand">
         <div className="flex flex-wrap">
             <div className="w-full p-2 sm:p-5 md:w-7/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f9f9f9]">
-                <div className="flex p-2 text-xs text-red-500">
+                <div className="flex p-2 text-xs text-[#fe7029]">
                     <div className="w-3/12">Appliances</div>
                     <div className="w-3/12">Quantity</div>
                     <div className="w-2/12">Load</div>
@@ -173,52 +183,95 @@ function Calculator() {
                     })
                 }
                 <div className="">
-                    <button className='shadow-lg bg-blue-600 uppercase text-xs font-semibold p-3 mt-2 rounded-full text-white' onClick={() => handleAddInput()}>Add Another Appliance</button>
+                    <button className='shadow-lg bg-[#182e4d] uppercase text-xs font-bold p-3 mt-2 rounded-full text-[#fe7029]' onClick={() => handleAddInput()}>Add Another Appliance</button>
                 </div>
 
             </div>
-            <div className="w-full p-2 sm:p-5 md:w-4/12 border border-gray-100 rounded-lg shadow-lg my-5 bg-[#f9f9f9]">
-                <div className="">
-                    <span className="text-red-600 mr-3 text-center text-2xl">
+            <div className="w-full p-2 sm:p-5 md:w-4/12 text-white border border-gray-100 rounded-lg shadow-lg my-5 bg-[#182e4d]">
+                <div className="font-semibold">
+                    <span className="text-[#fe7029] mr-3 uppercase text-center text-lg">
                         Total Load Capacity:
                     </span>
-                    <span className="text-2xl text-center">
+                    <span className="text-lg text-center">
                         {appData.load} kW
                     </span>
                 </div>
-                <div className="my-3">
-                    <span className="text-red-600 mr-3 text-center text-lg">
+                <div className="my-3 font-semibold">
+                    <span className="text-[#fe7029] mr-3 text-center text-base">
                         Daily Power Generation:
                     </span>
-                    <span className="text-lg text-center">
+                    <span className="text-base text-center">
                         {isNaN(appData.daily_power)? "0": appData.daily_power} kW
                     </span>
                 </div>
-                <div className="">
-                    <span className="text-red-600 mr-3 text-center text-lg">
+                <div className="font-semibold">
+                    <span className="text-[#fe7029] mr-3 text-center text-base">
                         Nighttime Backup Needed: 
                     </span>
-                    <span className="text-lg text-center">
+                    <span className="text-base text-center">
                         {isNaN(appData.night_power)? "0" : appData.night_power} kW
                     </span>
                 </div>
                 <hr className='w-9/12 my-3'/>
                 <div className="">
-                    <p className="text-xl mb-2">
+                    <p className="text-lg text-[#fe7029] font-semibold mb-2">
                         Let's Recommend A Perfect Solar System.
                     </p>
-                    <p className="text-base">
+                    <p className="text-sm">
                         How many hours on average everyday do you have grid electricity in your location?
                         <input 
-                            onChange={{}}
+                            onChange={handleGridChange}
                             value={appData.grid_time}
                             name='grid_time'
                             id="" 
                             type='number'
                             placeholder='How many hours?'
                             max="24"
-                            className="mt-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                            className="ml-3 h-8 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                     </p>
+                    <div className="my-3 font-semibold">
+                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+                            Daily Power Generation Needed:
+                        </span>
+                        <span className="text-sm text-center">
+                            {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
+                            "0": 
+                            Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100} kW
+                        </span>
+                    </div>
+                    <div className="my-3 font-semibold">
+                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+                            Solar Battery Required :
+                        </span>
+                        <span className="text-sm text-center">
+                            {isNaN(appData.night_power)? "0" : appData.night_power} kW
+                        </span>
+                    </div>
+                    <div className="my-3 font-semibold">
+                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+                            Expected Maximum Load :
+                        </span>
+                        <span className="text-sm text-center">
+                            {isNaN(appData.load)? "0" : appData.load} kW
+                        </span>
+                    </div>
+                </div>
+                <hr className='w-9/12 my-3'/>
+                <div className="">
+                    <p className="text-lg text-[#fe7029] font-semibold mb-2">
+                        Here is Your Most Suitable Solar System Option 
+                    </p>
+                    <p className="text-sm">
+                        After reviewing your entry and need, here is a suitable solar system to cover all your energy needs.
+                    </p>
+                    <div className="my-3 font-semibold">
+                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+                            {
+                                recommendPanel(appData.daily_power)
+                            }
+                        </span>
+                    </div>
+                    
                 </div>
             </div>
         </div>
