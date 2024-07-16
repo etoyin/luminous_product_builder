@@ -50,6 +50,7 @@ function Calculator() {
         })
     }, [rerenderMonitor])
     
+    function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
     const handleChange = (i, e) => {
         let fields = appData.fields
@@ -115,7 +116,7 @@ function Calculator() {
     <div>
       <div className="p-4 sm:p-10 font-quicksand">
         <div className="flex flex-wrap">
-            <div className="w-full p-2 sm:p-5 md:w-7/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f9f9f9]">
+            <div className="w-full p-2 sm:p-5 md:w-7/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f1f2f4]">
                 <div className="flex p-2 text-xs text-[#fe7029]">
                     <div className="w-3/12">Appliances</div>
                     <div className="w-3/12">Quantity</div>
@@ -192,111 +193,141 @@ function Calculator() {
                 </div>
 
             </div>
-            <div className="w-full p-2 sm:p-5 md:w-4/12 text-white border border-gray-100 rounded-lg shadow-lg my-5 bg-[#182e4d]">
-                <div className="font-semibold">
-                    <span className="text-[#fe7029] mr-3 uppercase text-center text-lg">
-                        Total Load Capacity:
-                    </span>
-                    <span className="text-lg text-center">
-                        {appData.load} kW
-                    </span>
+            <div className="w-full p-2 sm:p-4 md:w-4/12 border-8 border-white rounded-xl shadow-xl my-5 bg-[#f1f2f4]">
+                <div className="font-semibold mt-2 flex text-white flex-wrap justify-center items-center mx-auto" >
+                    <div className="bg-[#1994cb] text-base shadow py-1 px-5 mr-5 md:mr-3 lg:mr-5 rounded-full">Total Load Capacity</div>
+                    
+                    <div 
+                        className="text-sm shadow-lg rounded-full text-center w-16 h-16 border-8 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                        {appData.load}kW
+                    </div>
                 </div>
-                <div className="my-3 font-semibold">
-                    <span className="text-[#fe7029] mr-3 text-center text-base">
-                        Daily Power Generation:
-                    </span>
-                    <span className="text-base text-center">
+                <div className="my-3 font-semibold flex text-white flex-wrap justify-center items-center">
+                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mr-1 rounded-full">Daily Power Consumption</div>
+                    <div 
+                        className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                         {isNaN(appData.daily_power)? "0": appData.daily_power} kW
-                    </span>
-                </div>
-                <div className="font-semibold">
-                    <span className="text-[#fe7029] mr-3 text-center text-base">
-                        Nighttime Backup Needed: 
-                    </span>
-                    <span className="text-base text-center">
+                    </div>
+                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mx-1 rounded-full">Nighttime Backup Needed</div>
+                    <div 
+                        className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                         {isNaN(appData.night_power)? "0" : appData.night_power} kW
-                    </span>
+                    </div>
+                    
                 </div>
-                <hr className='w-9/12 my-3'/>
+                <div className="w-full my-3 h-[1.5px] bg-gray-300"></div>
+                
                 <div className="">
-                    <p className="text-lg text-[#fe7029] font-semibold mb-2">
-                        Let's Recommend A Perfect Solar System.
+                    <p className="text-base text-center text-[#fe7532] font-semibold mb-2">
+                        Your Perfect Solar Recommendation
                     </p>
-                    <p className="text-sm">
-                        How many hours on average everyday do you have grid electricity in your location?
-                        <input 
-                            onChange={handleGridChange}
-                            value={appData.grid_time}
-                            name='grid_time'
-                            id="" 
-                            type='number'
-                            placeholder='How many hours?'
-                            max="24"
-                            className="ml-3 h-8 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                    </p>
-                    <div className="my-1 font-semibold">
-                        <span className="text-[#fe7029] mr-3 text-center text-sm">
-                            Daily Power Generation Needed:
-                        </span>
-                        <span className="text-sm text-center">
-                            {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
-                            "0": 
-                            Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100} kW
-                        </span>
-                    </div>
-                    <div className="my-1 font-semibold">
-                        <span className="text-[#fe7029] mr-3 text-center text-sm">
-                            Solar Battery Required :
-                        </span>
-                        <span className="text-sm text-center">
-                            {isNaN(appData.night_power)? "0" : appData.night_power} kW
-                        </span>
-                    </div>
-                    <div className="my-1 font-semibold">
-                        <span className="text-[#fe7029] mr-3 text-center text-sm">
-                            Expected Maximum Load :
-                        </span>
-                        <span className="text-sm text-center">
-                            {isNaN(appData.load)? "0" : appData.load} kW
-                        </span>
+                    <div className="flex flex-wrap items-center justify-between">
+                        <div className="w-[150px]">
+                            <div className="rounded-full py px-3 bg-[#f0f1f7] text-center text-[10px] shadow-inner border ">
+                                How many hours on average everyday do you have grid electricity in your location?
+                            </div>
+                            <p className="text-sm flex justify-center">
+                                <input 
+                                    onChange={handleGridChange}
+                                    value={appData.grid_time}
+                                    name='grid_time'
+                                    id="" 
+                                    type='number'
+                                    placeholder='How many hours?'
+                                    max="24"
+                                    className="remove-arrow relative -top-1 h-8 w-8 bg-white border-2 border-[#f1f2f4] shadow text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                            </p>
+                        </div>
+                        <div className="w-7/12 text-white">
+                            <div className="flex items-center my-1">
+                                <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Required Daily Power Generation</div>
+                                <div 
+                                    className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
+                                    "0": 
+                                    Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100}kWp
+                                </div>
+                            </div>
+                            <div className="flex items-center my-1">
+                                <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Required Solar Battery Capacity</div>
+                                <div 
+                                    className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    {isNaN(appData.night_power)? "0" : appData.night_power}kWh
+                                </div>
+                            </div>
+                            <div className="flex items-center my-1">
+                                <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Maximum Load to be Powered</div>
+                                <div 
+                                    className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    {isNaN(appData.load)? "0" : appData.load} kW
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr className='w-9/12 my-3'/>
+                <div className="w-full my-3 h-[2px] bg-gray-300"></div>
                 <div className="">
-                    <p className="text-lg text-[#fe7029] font-semibold mb-2">
+                    <p className="text-base text-center text-[#fe7532] font-semibold mb-1">
                         Here is Your Most Suitable Solar System Option 
                     </p>
-                    <p className="text-sm">
+                    <p className="text-[8px] bg-[#1994cb] p-1 text-center rounded-full shadow text-white">
                         After reviewing your entry and need, here is a suitable solar system to cover all your energy needs.
                     </p>
-                    <div className="my-1 font-semibold">
-                        <span className="text-[#fe7029] mr-3 text-center text-sm">
-                            Recommend: {
-                                recommendPanel(appData.daily_power)
-                            }
-                        </span>
-                    </div>
-                    {
-                        console.log(appData.night_power)
-                    }
-                    {
-                        (appData.night_power === 0 || appData.night_power > 1.5) &&
-                        <div className="my-1 font-semibold">
-                            <span className="text-[#fe7029] mr-3 text-center text-sm">
-                                Recommend: {
-                                    // console.log(appData.load)
-                                    recommendInverter(appData.load)
+                    <div className="p-3 border mt-2 border-green-700 bg-[#bbf7d0] rounded-lg">
+                        <div className="bg-white text-base text-green-800 w-min px-3 font-semibold rounded-full mx-auto">Recommendations</div>
+                        <div className="flex flex-wrap justify-between mt-3">
+                                {
+                                    recommendPanel(appData.daily_power) &&
+                                    <div className="rounded-lg flex flex-col w-[84px] items-center px-2 bg-green-700 min-h-5 text-white">
+                                        <div className="text-base text-center">
+                                        {
+                                            recommendPanel(appData.daily_power)[0]
+                                        }
+                                        </div>
+                                        <div className="text-[8px] text-center">
+                                            {
+                                                recommendPanel(appData.daily_power)[1]
+                                            }
+                                        </div>
+                                    </div>
                                 }
-                            </span>
-                        </div>
-                    }
-                    <div className="my-1 font-semibold">
-                        <span className="text-[#fe7029] mr-3 text-center text-sm">
+
+                                {
+                                    (appData.night_power === 0 || appData.night_power > 1.5) &&
+                                    <div className="rounded-lg flex flex-col w-[84px] items-center px-3 bg-green-700 min-h-5 text-white">
+                                        <div className="text-base text-center">
+                                        {
+                                            recommendInverter(appData.load)[0]
+                                        }
+                                        </div>
+                                        <div className="text-[8px] text-center">
+                                            {
+                                                recommendInverter(appData.load)[1]
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            
+                            
                             {
-                                // console.log(appData.load)
-                                recommendBattery(appData.night_power)
+                                recommendBattery(appData.night_power).length > 0 && recommendBattery(appData.night_power).map((x,i) => {
+                                    return (
+                                        <div key={i} className="rounded-lg flex flex-col w-[84px] items-center px-2 bg-green-700 min-h-5 text-white">
+                                            <div className="text-base text-center">
+                                            {
+                                                x[0]
+                                            }
+                                            </div>
+                                            <div className="text-[8px] text-center">
+                                                {
+                                                    x[1]
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                })
                             }
-                        </span>
+                        </div>
                     </div>
                     
                 </div>
