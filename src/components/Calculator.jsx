@@ -122,7 +122,7 @@ function Calculator() {
                     <div className="w-3/12">Quantity</div>
                     <div className="w-2/12">Load</div>
                     <div className="w-2/12">Daytime Operating Hours</div>
-                    <div className="w-2/12">Nighttime Operating Hours</div>
+                    <div className="w-2/12">Night-time Operating Hours</div>
                 </div>
                 {
                     appData.fields.map((each, i) => {
@@ -208,7 +208,7 @@ function Calculator() {
                         className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                         {isNaN(appData.daily_power)? "0": appData.daily_power} kW
                     </div>
-                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mx-1 rounded-full">Nighttime Backup Needed</div>
+                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mx-1 rounded-full">Night-time Backup Needed</div>
                     <div 
                         className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                         {isNaN(appData.night_power)? "0" : appData.night_power} kW
@@ -218,7 +218,7 @@ function Calculator() {
                 <div className="w-full my-3 h-[1.5px] bg-gray-300"></div>
                 
                 <div className="">
-                    <p className="text-base text-center text-[#fe7532] font-semibold mb-2">
+                    <p className="text-base text-center text-[#fe7532] font-bold mb-2">
                         Your Perfect Solar Recommendation
                     </p>
                     <div className="flex flex-wrap items-center justify-between">
@@ -267,7 +267,7 @@ function Calculator() {
                 </div>
                 <div className="w-full my-3 h-[2px] bg-gray-300"></div>
                 <div className="">
-                    <p className="text-base text-center text-[#fe7532] font-semibold mb-1">
+                    <p className="text-base text-center text-[#1994cb] font-semibold mb-1">
                         Here is Your Most Suitable Solar System Option 
                     </p>
                     <p className="text-[8px] bg-[#1994cb] p-1 text-center rounded-full shadow text-white">
