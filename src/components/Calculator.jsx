@@ -203,17 +203,17 @@ function Calculator() {
                     </div>
                 </div>
                 <div className="my-3 font-semibold flex text-white flex-wrap justify-between items-center">
-                    <div className="flex mb-1 items-center w-[205px] sm:w-max m-auto justify-between">
-                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-2 mr-1 rounded-full">Daily Power Consumption</div>
+                    <div className="flex mb-1 items-center w-[220px] sm:w-max m-auto justify-between">
+                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 rounded-full">Daily Power Consumption</div>
                         <div 
-                            className="text-[10px] shadow-lg rounded-full text-center w-14 h-14 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            className="text-[10px] shadow-lg rounded-full text-center w-[50px] h-[50px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                             {isNaN(appData.daily_power)? "0": appData.daily_power} kW
                         </div>
                     </div>
-                    <div className="flex mb-1 items-center w-[205px] m-auto sm:w-max justify-between">
-                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-2 mr-1 sm:mx-1 rounded-full">Night-time Backup Needed</div>
+                    <div className="flex mb-1 items-center w-[220px] m-auto sm:w-max justify-between">
+                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 rounded-full">Night-time Backup Needed</div>
                         <div 
-                            className="text-[10px] shadow-lg rounded-full text-center w-14 h-14 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            className="text-[10px] shadow-lg rounded-full text-center w-[50px] h-[50px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                             {isNaN(appData.night_power)? "0" : appData.night_power} kW
                         </div>
                     </div>
@@ -244,25 +244,25 @@ function Calculator() {
                         </div>
                         <div className="w-full sm:w-7/12 text-white">
                             <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-2 mr-1 rounded-full">Required Daily Power Generation</div>
+                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-1 mr-1 rounded-full">Required Daily Power Generation</div>
                                 <div 
-                                    className="text-[10px] shadow-lg rounded-full text-center w-14 h-14 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    className="text-[10px] shadow-lg rounded-full text-center w-[50px] h-[50px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
                                     {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
                                     "0": 
                                     Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100}kWp
                                 </div>
                             </div>
                             <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-2 mr-1 rounded-full">Required Solar Battery Capacity</div>
+                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-1 mr-1 rounded-full">Required Solar Battery Capacity</div>
                                 <div 
-                                    className="text-[10px] shadow-lg rounded-full text-center w-14 h-14 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    className="text-[10px] shadow-lg rounded-full text-center w-[50px] h-[50px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
                                     {isNaN(appData.night_power)? "0" : appData.night_power}kWh
                                 </div>
                             </div>
                             <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-2 mr-1 rounded-full">Maximum Load to be Powered</div>
+                                <div className="bg-[#fe7532] text-[9px] shadow py-2 px-1 mr-1 rounded-full">Maximum Load to be Powered</div>
                                 <div 
-                                    className="text-[10px] shadow-lg rounded-full text-center w-14 h-14 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    className="text-[10px] shadow-lg rounded-full text-center w-[50px] h-[50px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
                                     {isNaN(appData.load)? "0" : appData.load} kW
                                 </div>
                             </div>
