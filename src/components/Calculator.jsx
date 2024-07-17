@@ -193,7 +193,7 @@ function Calculator() {
                 </div>
 
             </div>
-            <div className="w-full p-2 sm:p-4 md:w-4/12 border-8 border-white rounded-xl shadow-xl my-5 bg-[#f1f2f4]">
+            <div className="w-full p-2 sm:p-2 md:w-4/12 border-8 border-white rounded-xl shadow-xl my-5 bg-[#f1f2f4]">
                 <div className="font-semibold mt-2 flex text-white flex-wrap justify-center items-center mx-auto" >
                     <div className="bg-[#1994cb] text-base shadow py-3 px-5 mr-5 md:mr-3 lg:mr-5 rounded-full">Total Load Capacity</div>
                     
