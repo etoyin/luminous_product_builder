@@ -49,10 +49,10 @@ export const recommendBattery = (entry) =>{
 
     switch (true) {
         case entry > 0 && entry <= 0.6:
-            result = ["1 Inaeko 1.2kVA|614Wh Solar Generator (Inverter + Battery)"]
+            result = [[1, "Inaeko 1.2kVA|614Wh Solar Generator (Inverter + Battery)"]]
             break;
         case entry > 0.6 && entry <= 1.5:
-            result = ["1 Inaeko 2.2kVA|1536Wh Solar Generator (Inverter + Battery)"]
+            result = [[1, "Inaeko 2.2kVA|1536Wh Solar Generator (Inverter + Battery)"]]
             break;
         case entry > 1.5 && entry <= 4.36:
             result = [[1, "Unit of Arnergy 5.12kWh Battery"], [2, "Units of Inaeko 2.18kWh Battery"]]
