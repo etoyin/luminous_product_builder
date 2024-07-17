@@ -98,7 +98,7 @@ export const recommendInverter = (entry) =>{
             result = [1, "Unit of Arnergy 5kVA Inverter "];
             break;
         case entry > 5:
-            result = [round5(entry*100/80), 'Unit of Arnergy 5kVA Inverter'];
+            result = [(round5(entry*100/80) / 5), 'Unit of Arnergy 5kVA Inverter'];
             break;
         default:
             break;
