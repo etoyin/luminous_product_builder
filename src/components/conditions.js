@@ -58,7 +58,7 @@ export const recommendBattery = (entry) =>{
             result = [[1, "Unit of Arnergy 5.12kWh Battery"], [2, "Units of Inaeko 2.18kWh Battery"]]
             break;
         case entry > 4.36 && entry <= 5.12:
-            result = [["1 Unit of Arnergy 5.12kWh Battery"], [3, "Units of Inaeko 2.18kWh Battery "]]
+            result = [[1, "Unit of Arnergy 5.12kWh Battery"], [3, "Units of Inaeko 2.18kWh Battery "]]
             break;
         case entry > 5.12 && entry <= 10.24:
             result = [[2, "Unit of Arnergy 5.12kWh Battery"], [5, "Units of Inaeko 2.18kWh Battery"]]
@@ -76,7 +76,7 @@ export const recommendBattery = (entry) =>{
             result = [[8, "Unit of Arnergy 5.12kWh Battery"], [22, "Units of Inaeko 2.18kWh Battery"]]
             break;
         case entry > 46.08:
-            result = [[Math.ceil(entry/5.12), `Unit of Arnergy 5.12kWh Battery`], [Math.ceil(entry/2.18), `Units of Inaeko 2.18kWh Battery`]]
+            result = [[Math.ceil(entry/5.12), 'Unit of Arnergy 5.12kWh Battery'], [Math.ceil(entry/2.18), 'Units of Inaeko 2.18kWh Battery']]
             break;
         default:
             break;

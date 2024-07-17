@@ -202,16 +202,20 @@ function Calculator() {
                         {appData.load}kW
                     </div>
                 </div>
-                <div className="my-3 font-semibold flex text-white flex-wrap justify-center items-center">
-                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mr-1 rounded-full">Daily Power Consumption</div>
-                    <div 
-                        className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
-                        {isNaN(appData.daily_power)? "0": appData.daily_power} kW
+                <div className="my-3 font-semibold flex text-white flex-wrap justify-between items-center">
+                    <div className="flex mb-1 items-center w-[205px] sm:w-max m-auto justify-between">
+                        <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mr-1 rounded-full">Daily Power Consumption</div>
+                        <div 
+                            className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            {isNaN(appData.daily_power)? "0": appData.daily_power} kW
+                        </div>
                     </div>
-                    <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mx-1 rounded-full">Night-time Backup Needed</div>
-                    <div 
-                        className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
-                        {isNaN(appData.night_power)? "0" : appData.night_power} kW
+                    <div className="flex mb-1 items-center w-[205px] m-auto sm:w-max justify-between">
+                        <div className="bg-[#1994cb] text-[10px] shadow py-1 px-2 mr-1 sm:mx-1 rounded-full">Night-time Backup Needed</div>
+                        <div 
+                            className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            {isNaN(appData.night_power)? "0" : appData.night_power} kW
+                        </div>
                     </div>
                     
                 </div>
@@ -222,8 +226,8 @@ function Calculator() {
                         Your Perfect Solar Recommendation
                     </p>
                     <div className="flex flex-wrap items-center justify-between">
-                        <div className="w-[150px]">
-                            <div className="rounded-full py px-3 bg-[#f0f1f7] text-center text-[10px] shadow-inner border ">
+                        <div className="w-full sm:w-[150px]">
+                            <div className="rounded-full p-3 sm:p-0 sm:px-3 bg-[#f0f1f7] text-center text-[10px] shadow-inner border ">
                                 How many hours on average everyday do you have grid electricity in your location?
                             </div>
                             <p className="text-sm flex justify-center">
@@ -235,11 +239,11 @@ function Calculator() {
                                     type='number'
                                     placeholder='How many hours?'
                                     max="24"
-                                    className="remove-arrow relative -top-1 h-8 w-8 bg-white border-2 border-[#f1f2f4] shadow text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                    className="remove-arrow relative -top-1 h-8 w-8 bg-white border-2 border-[#f1f2f4] shadow text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 p-2.5"/>
                             </p>
                         </div>
-                        <div className="w-7/12 text-white">
-                            <div className="flex items-center my-1">
+                        <div className="w-full sm:w-7/12 text-white">
+                            <div className="flex items-center w-[205px] m-auto justify-between my-1">
                                 <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Required Daily Power Generation</div>
                                 <div 
                                     className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
@@ -248,14 +252,14 @@ function Calculator() {
                                     Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100}kWp
                                 </div>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center w-[205px] m-auto justify-between my-1">
                                 <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Required Solar Battery Capacity</div>
                                 <div 
                                     className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
                                     {isNaN(appData.night_power)? "0" : appData.night_power}kWh
                                 </div>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center w-[205px] m-auto justify-between my-1">
                                 <div className="bg-[#fe7532] text-[9px] shadow py-1 px-2 mr-1 rounded-full">Maximum Load to be Powered</div>
                                 <div 
                                     className="text-[10px] shadow-lg rounded-full text-center w-10 h-10 border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
