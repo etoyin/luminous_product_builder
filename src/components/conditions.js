@@ -94,7 +94,7 @@ export const recommendInverter = (entry) =>{
         case entry > 0 && entry <= 2.4:
             result = [1, "Unit of Arnergy 3kVA Inverter"];
             break;
-        case entry > 3.4 && entry <= 5:
+        case entry > 2.4 && entry <= 5:
             result = [1, "Unit of Arnergy 5kVA Inverter "];
             break;
         case entry > 5:

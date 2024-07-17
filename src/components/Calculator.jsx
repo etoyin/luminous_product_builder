@@ -297,6 +297,10 @@ function Calculator() {
                                 }
 
                                 {
+                                    console.log(appData.load)
+                                }
+
+                                {
                                     (appData.night_power === 0 || appData.night_power > 1.5) &&
                                     <div className="rounded-lg flex flex-col w-[84px] items-center px-3 bg-green-700 min-h-5 text-white">
                                         <div className="text-base text-center">
