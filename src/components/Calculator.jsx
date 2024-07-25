@@ -116,7 +116,7 @@ function Calculator() {
         <div className="flex flex-wrap">
             <div className="w-full p-2 sm:p-5 md:w-7/12 xl:w-6/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f1f2f4]">
                 
-                <div className="sm:flex my-2">
+                <div className="hidden sm:flex my-2">
                     <div className="mx-1">
                         <select
                             onChange={(e) => handleChange(i, e)}
