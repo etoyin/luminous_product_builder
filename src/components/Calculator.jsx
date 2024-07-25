@@ -9,6 +9,8 @@ function Calculator() {
         grid_time: 0,
         night_power: 0,
         load: 0,
+        daily_power: 0,
+        required_time: 0,
         fields: [
             {
                 appliance: "",
@@ -46,7 +48,8 @@ function Calculator() {
             ...appData,
             load: load/1000,
             daily_power: Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100,
-            night_power: Math.round((((load / 1000) * (night_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100
+            night_power: Math.round((((load / 1000) * (night_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100,
+            required_time: Math.round(((Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100 - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100
         })
     }, [rerenderMonitor]);
 
@@ -78,14 +81,11 @@ function Calculator() {
         setRerenderMonitor(!rerenderMonitor);
     }
     const handleGridChange = (e) => {
-        
         setAppData({
             ...appData,
             grid_time: e.target.value
         });
-
         setRerenderMonitor(!rerenderMonitor);
-        
     }
     const handleDeleteInput = (index, e) => {
         e.preventDefault();
@@ -122,7 +122,7 @@ function Calculator() {
                             onChange={(e) => handleChange(i, e)}
                             name='appliance'
                             value=""
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg invisible block w-full sm:w-[130px] p-2.5 ">
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hidden sm:block invisible block w-full sm:w-[130px] p-2.5 ">
                         </select>
                         <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
                             Appliance
@@ -135,7 +135,7 @@ function Calculator() {
                         id="" 
                         type='number'
                         placeholder='Quantity'
-                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        className="text-sm rounded-lg block border border-gray-300 hidden sm:block invisible w-full p-2.5 "/>
                         <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
                             Quantity
                         </div>
@@ -147,7 +147,7 @@ function Calculator() {
                         id="" 
                         type='number'
                         placeholder='Quantity'
-                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        className="text-sm rounded-lg block border border-gray-300 hidden sm:block invisible w-full p-2.5 "/>
                         <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
                             Load
                         </div>
@@ -159,7 +159,7 @@ function Calculator() {
                         id="" 
                         type='number'
                         placeholder='Quantity'
-                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        className="text-sm rounded-lg block border border-gray-300 hidden sm:block invisible w-full p-2.5 "/>
                         <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
                             Daytime Operating Hours
                         </div>
@@ -171,14 +171,14 @@ function Calculator() {
                         id="" 
                         type='number'
                         placeholder='Quantity'
-                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        className="text-sm rounded-lg block border border-gray-300 hidden sm:block invisible w-full p-2.5 "/>
                         <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
                             Night time Operating Hours
                         </div>
                     </div>
                     <div 
                         className="flex items-center cursor-pointer">
-                        <i className="las la-trash-alt invisible"></i>
+                        <i className="las la-trash-alt hidden sm:block invisible"></i>
                     </div>
                 </div>
                 {
@@ -304,9 +304,9 @@ function Calculator() {
                                 <div className="small-bars bg-[#fe7532] text-[9px] font-bold shadow py-2 px-1 mr-1 rounded-full">Required Daily Power Generation</div>
                                 <div 
                                     className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
-                                    {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
+                                    {isNaN(appData.required_time)? 
                                     "0": 
-                                    Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100} kWp
+                                    (appData.required_time < 0 ? 0 : appData.required_time )} kWp
                                 </div>
                             </div>
                             <div className="flex items-center w-[220px] xl:w-full 2xl:w-80 m-auto justify-between my-1">
@@ -338,16 +338,16 @@ function Calculator() {
                         <div className="bg-white text-base xl:text-lg text-green-800 w-min px-3 font-semibold rounded-full mx-auto">Recommendations</div>
                         <div className="flex flex-wrap justify-center mt-3">
                                 {
-                                    recommendPanel(appData.daily_power) &&
+                                    recommendPanel(appData.required_time) &&
                                     <div className="rounded-lg my-1 mx-1 flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
                                         <div className="text-base text-center xl:text-lg">
                                         {
-                                            recommendPanel(appData.daily_power)[0]
+                                            recommendPanel(appData.required_time)[0]
                                         }
                                         </div>
                                         <div className="text-[8px] xl:text-xs text-center">
                                             {
-                                                recommendPanel(appData.daily_power)[1]
+                                                recommendPanel(appData.required_time)[1]
                                             }
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@ function Calculator() {
                             recommendBattery(appData.night_power) && 
                             <div className="flex flex-wrap my-1 mx-1 justify-between items-center">
                             
-                                <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
+                                <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-black min-h-5 text-white">
                                     <div className="text-base text-center xl:text-lg">
                                     {
                                         recommendBattery(appData.night_power)[0][0]
@@ -395,7 +395,7 @@ function Calculator() {
                                 }
                                 {
                                     recommendBattery(appData.night_power).length > 1 &&
-                                    <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
+                                    <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-white min-h-5 text-black font-semibold">
                                         <div className="text-base text-center xl:text-lg">
                                         {
                                             recommendBattery(appData.night_power)[1][0]
