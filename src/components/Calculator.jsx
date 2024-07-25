@@ -114,41 +114,67 @@ function Calculator() {
     <div>
       <div className="p-4 sm:p-10 font-quicksand">
         <div className="flex flex-wrap">
-            <div className="w-full p-2 sm:p-5 md:w-7/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f1f2f4]">
+            <div className="w-full p-2 sm:p-5 md:w-7/12 xl:w-6/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f1f2f4]">
+                
                 <div className="sm:flex my-2">
                     <div className="mx-1">
-                        <textarea
-                            value="Appliances"
-                            disabled={true}
-                            className="no-scrollbar border-none text-[#fe7029] w-full h-6 resize-none sm:w-[130px] p-2 text-xs"/>
+                        <select
+                            onChange={(e) => handleChange(i, e)}
+                            name='appliance'
+                            value=""
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg invisible block w-full sm:w-[130px] p-2.5 ">
+                        </select>
+                        <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
+                            Appliance
+                        </div>
                     </div>
                     <div className="mx-1">
-                        <textarea 
-                            value='Quantity' 
-                            disabled={true}
-                            placeholder='Quantity'
-                            className="no-scrollbar border-none text-[#fe7029] w-full h-6 resize-none p-2 text-xs"/>
+                    <input
+                        value="{each.quantity}"
+                        name='quantity'
+                        id="" 
+                        type='number'
+                        placeholder='Quantity'
+                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
+                            Quantity
+                        </div>
                     </div>
                     <div className="mx-1">
-                        <textarea
-                            value='Load'
-                            placeholder="load"
-                            disabled={true}
-                            className="no-scrollbar border-none text-[#fe7029] w-full h-6 resize-none p-2 text-xs "/>
+                    <input
+                        value="{each.quantity}"
+                        name='quantity'
+                        id="" 
+                        type='number'
+                        placeholder='Quantity'
+                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
+                            Load
+                        </div>
                     </div>
                     <div className="mx-1">
-                        <textarea
-                            value='Daytime Operating Hours'
-                            placeholder="Daytime Operating hours"
-                            disabled={true}
-                            className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs"/>
+                    <input
+                        value="{each.quantity}"
+                        name='quantity'
+                        id="" 
+                        type='number'
+                        placeholder='Quantity'
+                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
+                            Daytime Operating Hours
+                        </div>
                     </div>
                     <div className="mx-1">
-                        <textarea
-                            value='Night-time Operating Hours'
-                            placeholder="Night-time Operating hours"
-                            disabled={true}
-                            className="no-scrollbar border-none resize-none h-6 sm:h-[60px] text-[#fe7029] w-full p-2 text-xs"/>
+                    <input
+                        value="{each.quantity}"
+                        name='quantity'
+                        id="" 
+                        type='number'
+                        placeholder='Quantity'
+                        className="text-sm rounded-lg block border border-gray-300 invisible w-full p-2.5 "/>
+                        <div className="no-scrollbar border-none text-[#fe7029] h-6 sm:h-[60px] w-full resize-none p-2 text-xs">
+                            Night time Operating Hours
+                        </div>
                     </div>
                     <div 
                         className="flex items-center cursor-pointer">
@@ -224,27 +250,27 @@ function Calculator() {
                 </div>
 
             </div>
-            <div className="w-full p-2 sm:p-2 md:w-4/12 border-8 border-white rounded-xl shadow-xl my-5 bg-[#f1f2f4]">
+            <div className="w-full p-2 sm:p-2 md:w-4/12 xl:w-5/12 border-8 border-white rounded-xl shadow-xl my-5 bg-[#f1f2f4]">
                 <div className="font-semibold mt-2 flex text-white flex-wrap justify-center items-center mx-auto" >
-                    <div className="bg-[#1994cb] text-base shadow py-3 px-5 mr-5 md:mr-3 lg:mr-5 rounded-full">Total Load Capacity</div>
+                    <div className="bg-[#1994cb] text-base shadow py-3 xl:py-5 xl:px-7 px-5 mr-5 md:mr-3 lg:mr-5 rounded-full">Total Load Capacity</div>
                     
                     <div 
-                        className="text-sm sm:text-base font-bold shadow-lg rounded-full text-center w-20 h-20 sm:w-24 sm:h-24 border-8 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                        className="text-xs sm:text-sm xl:text-base font-bold shadow-lg rounded-full text-center w-20 h-20 sm:w-24 sm:h-24 xl:w-28 xl:h-28 border-8 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
                         {appData.load}kW
                     </div>
                 </div>
                 <div className="my-3 font-semibold flex text-white flex-wrap justify-between items-center">
                     <div className="flex mb-1 items-center w-[220px] sm:w-max m-auto justify-between">
-                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Daily Power Consumption</div>
+                        <div className="small-bars bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Daily Power Consumption</div>
                         <div 
-                            className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            className="small-circle text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                             {isNaN(appData.daily_power)? "0": appData.daily_power} kW
                         </div>
                     </div>
                     <div className="flex mb-1 items-center w-[220px] m-auto sm:w-max justify-between">
-                        <div className="bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Night-time Backup Needed</div>
+                        <div className="small-bars bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Night-time Backup Needed</div>
                         <div 
-                            className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center">
+                            className="small-circle text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                             {isNaN(appData.night_power)? "0" : appData.night_power} kW
                         </div>
                     </div>
@@ -257,43 +283,43 @@ function Calculator() {
                         Your Perfect Solar Recommendation
                     </p>
                     <div className="flex flex-wrap items-center justify-between">
-                        <div className="w-full sm:w-[150px]">
-                            <div className="rounded-full font-bold p-3 sm:p-0 sm:px-3 bg-[#f0f1f7] text-center text-[10px] shadow-inner border ">
+                        <div className="w-full sm:w-[150px] xl:w-5/12 m-auto">
+                            <div className="rounded-full font-bold p-3 sm:p-0 sm:px-3 bg-[#f0f1f7] text-center text-[10px] xl:p-4 xl:text-sm shadow-inner border ">
                                 How many hours on average everyday do you have grid electricity in your location?
                             </div>
                             <p className="text-sm flex justify-center">
                                 <input 
                                     onChange={handleGridChange}
-                                    value={appData.grid_time}
+                                    value={appData.grid_time > 0 ? appData.grid_time:""}
                                     name='grid_time'
                                     id="" 
                                     type='number'
                                     placeholder='How many hours?'
                                     max="24"
-                                    className="remove-arrow relative -top-1 h-8 w-8 bg-white border-2 border-[#f1f2f4] shadow text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 p-2.5"/>
+                                    className="remove-arrow relative -top-1 h-8 w-8 xl:w-12 xl:h-12 bg-white border-2 border-[#f1f2f4] shadow text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 p-2.5"/>
                             </p>
                         </div>
-                        <div className="w-full sm:w-7/12 text-white">
-                            <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] font-bold shadow py-2 px-1 mr-1 rounded-full">Required Daily Power Generation</div>
+                        <div className="w-full sm:w-7/12 m-auto text-white">
+                            <div className="flex items-center w-[220px] xl:w-full 2xl:w-80 m-auto justify-between my-1">
+                                <div className="small-bars bg-[#fe7532] text-[9px] font-bold shadow py-2 px-1 mr-1 rounded-full">Required Daily Power Generation</div>
                                 <div 
-                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                                     {isNaN(appData.daily_power - (appData.load * appData.grid_time))? 
                                     "0": 
-                                    Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100}kWp
+                                    Math.round(((appData.daily_power - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100} kWp
                                 </div>
                             </div>
-                            <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] shadow font-bold py-2 px-1 mr-1 rounded-full">Required Solar Battery Capacity</div>
+                            <div className="flex items-center w-[220px] xl:w-full 2xl:w-80 m-auto justify-between my-1">
+                                <div className="small-bars bg-[#fe7532] text-[9px] shadow font-bold py-2 px-1 mr-1 rounded-full">Required Solar Battery Capacity</div>
                                 <div 
-                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
-                                    {isNaN(appData.night_power)? "0" : appData.night_power}kWh
+                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
+                                    {isNaN(appData.night_power)? "0" : appData.night_power} kWh
                                 </div>
                             </div>
-                            <div className="flex items-center w-[220px] m-auto justify-between my-1">
-                                <div className="bg-[#fe7532] text-[9px] shadow py-2 font-bold px-1 mr-1 rounded-full">Maximum Load to be Powered</div>
+                            <div className="flex items-center w-[220px] xl:w-full 2xl:w-80 m-auto justify-between my-1">
+                                <div className="small-bars bg-[#fe7532] text-[9px] shadow py-2 font-bold px-1 mr-1 rounded-full">Maximum Load to be Powered</div>
                                 <div 
-                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center">
+                                    className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                                     {isNaN(appData.load)? "0" : appData.load} kW
                                 </div>
                             </div>
@@ -302,24 +328,24 @@ function Calculator() {
                 </div>
                 <div className="w-full my-3 h-[2px] bg-gray-300"></div>
                 <div className="">
-                    <p className="text-base text-center text-[#1994cb] font-semibold mb-1">
+                    <p className="text-base text-center text-[#1994cb] xl:text-base font-semibold mb-1">
                         Here is Your Most Suitable Solar System Option 
                     </p>
-                    <p className="text-[8px] bg-[#1994cb] font-bold p-1 text-center rounded-full shadow text-white">
+                    <p className="text-[8px] xl:text-xs bg-[#1994cb] font-bold p-1 text-center rounded-full shadow text-white">
                         After reviewing your entry and need, here is a suitable solar system to cover all your energy needs.
                     </p>
                     <div className="p-3 border mt-2 border-green-700 bg-[#bbf7d0] rounded-lg">
-                        <div className="bg-white text-base text-green-800 w-min px-3 font-semibold rounded-full mx-auto">Recommendations</div>
-                        <div className="flex flex-wrap justify-between mt-3">
+                        <div className="bg-white text-base xl:text-lg text-green-800 w-min px-3 font-semibold rounded-full mx-auto">Recommendations</div>
+                        <div className="flex flex-wrap justify-center mt-3">
                                 {
                                     recommendPanel(appData.daily_power) &&
-                                    <div className="rounded-lg flex flex-col w-[84px] items-center px-2 bg-green-700 min-h-5 text-white">
-                                        <div className="text-base text-center">
+                                    <div className="rounded-lg my-1 mx-1 flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
+                                        <div className="text-base text-center xl:text-lg">
                                         {
                                             recommendPanel(appData.daily_power)[0]
                                         }
                                         </div>
-                                        <div className="text-[8px] text-center">
+                                        <div className="text-[8px] xl:text-xs text-center">
                                             {
                                                 recommendPanel(appData.daily_power)[1]
                                             }
@@ -328,18 +354,14 @@ function Calculator() {
                                 }
 
                                 {
-                                    console.log(appData.load)
-                                }
-
-                                {
                                     (appData.night_power === 0 || appData.night_power > 1.5) &&
-                                    <div className="rounded-lg flex flex-col w-[84px] items-center px-3 bg-green-700 min-h-5 text-white">
-                                        <div className="text-base text-center">
+                                    <div className="rounded-lg my-1 mx-1 flex flex-col w-[84px] xl:w-36 items-center px-3 bg-green-700 min-h-5 text-white">
+                                        <div className="text-base xl:text-lg text-center">
                                         {
                                             recommendInverter(appData.load)[0]
                                         }
                                         </div>
-                                        <div className="text-[8px] text-center">
+                                        <div className="text-[8px] xl:text-xs text-center">
                                             {
                                                 recommendInverter(appData.load)[1]
                                             }
@@ -351,15 +373,15 @@ function Calculator() {
                             }
                             {
                             recommendBattery(appData.night_power) && 
-                            <div className="flex flex-wrap justify-between items-center">
+                            <div className="flex flex-wrap my-1 mx-1 justify-between items-center">
                             
-                                <div className="rounded-lg flex flex-col w-[84px] items-center px-2 bg-green-700 min-h-5 text-white">
-                                    <div className="text-base text-center">
+                                <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
+                                    <div className="text-base text-center xl:text-lg">
                                     {
                                         recommendBattery(appData.night_power)[0][0]
                                     }
                                     </div>
-                                    <div className="text-[8px] text-center">
+                                    <div className="text-[8px] text-center xl:text-xs">
                                         {
                                             recommendBattery(appData.night_power)[0][1]
                                         }
@@ -367,19 +389,19 @@ function Calculator() {
                                 </div>
                                 {
                                     recommendBattery(appData.night_power).length > 1 &&
-                                    <div className='text-xs font-bold'>
+                                    <div className='text-xs mx-1 font-bold'>
                                         or
                                     </div>
                                 }
                                 {
                                     recommendBattery(appData.night_power).length > 1 &&
-                                    <div className="rounded-lg flex flex-col w-[84px] items-center px-2 bg-green-700 min-h-5 text-white">
-                                        <div className="text-base text-center">
+                                    <div className="rounded-lg flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
+                                        <div className="text-base text-center xl:text-lg">
                                         {
                                             recommendBattery(appData.night_power)[1][0]
                                         }
                                         </div>
-                                        <div className="text-[8px] text-center">
+                                        <div className="text-[8px] text-center xl:text-xs">
                                             {
                                                 recommendBattery(appData.night_power)[1][1]
                                             }

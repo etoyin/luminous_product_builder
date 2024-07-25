@@ -22,3 +22,22 @@
         scrollbar-width: none;  /* Firefox */
   }
 }
+
+.small-bars{
+    @apply xl:py-3 xl:px-2 xl:text-xs
+};
+.small-circle{
+    @apply xl:text-sm xl:w-96 xl:h-96
+}
+
+/* @media only screen and (max-width: 600px) {
+    .tr-class {
+        @apply  mb-4
+    }
+    .td-class{
+        @apply w-full
+    }
+    .tb-class{
+        @apply w-[1000px]
+    }
+} */
