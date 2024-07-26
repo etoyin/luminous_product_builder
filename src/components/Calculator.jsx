@@ -261,7 +261,7 @@ function Calculator() {
                 </div>
                 <div className="my-3 font-semibold flex text-white flex-wrap justify-between items-center">
                     <div className="flex mb-1 items-center w-[220px] sm:w-max m-auto justify-between">
-                        <div className="small-bars bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Daily Power Consumption</div>
+                        <div className="small-bars bg-[#1994cb] text-[10px] shadow py-2 px-1 mr-1 font-bold rounded-full">Daytime Power Consumption</div>
                         <div 
                             className="small-circle text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#1994cb] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                             {isNaN(appData.daily_power)? "0": appData.daily_power} kW
@@ -317,7 +317,7 @@ function Calculator() {
                                 </div>
                             </div>
                             <div className="flex items-center w-[220px] xl:w-full 2xl:w-80 m-auto justify-between my-1">
-                                <div className="small-bars bg-[#fe7532] text-[9px] shadow py-2 font-bold px-1 mr-1 rounded-full">Maximum Load to be Powered</div>
+                                <div className="small-bars bg-[#fe7532] text-[9px] shadow py-2 font-bold px-1 mr-1 rounded-full">Maximum Load you can connect to</div>
                                 <div 
                                     className="text-[10px] sm:text-[12px] font-bold shadow-lg rounded-full text-center w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] border-4 border-[#f1f2f4] bg-[#fe7532] flex items-center justify-center xl:text-sm xl:w-20 xl:h-20">
                                     {isNaN(appData.load)? "0" : appData.load} kW
@@ -331,7 +331,7 @@ function Calculator() {
                     <p className="text-base text-center text-[#1994cb] xl:text-base font-semibold mb-1">
                         Here is Your Most Suitable Solar System Option 
                     </p>
-                    <p className="text-[8px] xl:text-xs bg-[#1994cb] font-bold p-1 text-center rounded-full shadow text-white">
+                    <p className="text-[8px] xl:text-sm bg-[#1994cb] font-bold p-1 text-center rounded-full shadow text-white">
                         After reviewing your entry and need, here is a suitable solar system to cover all your energy needs.
                     </p>
                     <div className="p-3 border mt-2 border-green-700 bg-[#bbf7d0] rounded-lg">
