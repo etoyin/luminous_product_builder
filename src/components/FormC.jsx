@@ -55,17 +55,7 @@ function FormC(props) {
             
             let message = 
                 `
-                I would like to request the following quote 
-                Required Daily Power Generation: ${data.daily_power}\n
-                Required Solar Battery Capacity: ${data.battery}\n
-                Maximum Load you can connect to: ${data.load}\n
-                Hours of grid electricity in my location: ${data.grid}\n
-                
-                Below are my contact details: 
-                WhatsApp Phone number: ${data.phone}.\n
-                I will like to be contacted via ${data.reach} at ${data.time}
-                
-                I heard about Arnergy through ${data.heard}`
+                I would like to request the following quote\nRequired Daily Power Generation: ${data.daily_power}\n Required Solar Battery Capacity: ${data.battery}\n Maximum Load you can connect to: ${data.load}\n Hours of grid electricity in my location: ${data.grid}\n Below are my contact details:\n WhatsApp Phone number: ${data.phone}.\n I will like to be contacted via ${data.reach} at ${data.time}\n I heard about Arnergy through ${data.heard}`
             
             let formData = new FormData();
             formData.append("name", data.name);

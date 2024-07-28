@@ -1,11 +1,4 @@
-import React, { useState } from 'react'
-
-import emailjs from 'emailjs-com';
-
-const SERVICE_ID = "service_6m4g25h";
-const TEMPLATE_ID = "template_g1khc67";
-const PUBLIC_KEY = "qYBtwCh8_GIe15Pwp";
-
+import React, { useState } from 'react';
 
 function Form(props) {
     let capa = props.counters.inverterCounter * 5;
@@ -56,22 +49,13 @@ function Form(props) {
             });
 
             
-            let message = `I would like to request the following quote 
-                            Hybrid Inverter Capacity: ${data.capacity}\n
-                            Solar Panel Capacity: ${data.power_gen}\n
-                            Battery Backup Capacity: ${data.backup}\n
-                            
-                            Below are my contact details: 
-                            WhatsApp Phone number: ${data.phone}.\n
-                            I will like to be contacted via ${data.reach} at ${data.time}
-                            
-                            I heard about Arnergy through ${data.heard}`
-        
+            let message = `I would like to request the following quote\n Hybrid Inverter Capacity: ${data.capacity}\n Solar Panel Capacity: ${data.power_gen}\n Battery Backup Capacity: ${data.backup}\n Below are my contact details: WhatsApp Phone number: ${data.phone}.\n I will like to be contacted via ${data.reach} at ${data.time} I heard about Arnergy through ${data.heard}`
+
             let formData = new FormData();
             formData.append("name", data.name);
             formData.append("email", data.email);
             formData.append("message", message);
-            formData.append("subject", '"Build Your Product" Quotation Request');
+            formData.append("subject", 'Build Your Product Quotation Request');
         
             fetch("https://anergy-quotations.thekreativestack.com/submit_calculator_form.php", {
                 method: 'POST',
