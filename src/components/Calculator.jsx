@@ -49,7 +49,8 @@ function Calculator() {
             load: load/1000,
             daily_power: Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100,
             night_power: Math.round((((load / 1000) * (night_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100,
-            required_time: Math.round(((Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100 - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100
+            required_time: Math.round(((Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100 + (Math.round((((load / 1000) * (night_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100) - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100,
+            required_time2: Math.round(((Math.round((((load / 1000) * (day_hours / number_of_appliances)) + Number.EPSILON) * 100) / 100  - (appData.load * appData.grid_time)) + Number.EPSILON) * 100) / 100
         })
     }, [rerenderMonitor]);
 
@@ -338,16 +339,16 @@ function Calculator() {
                         <div className="bg-white text-base xl:text-lg text-green-800 w-min px-3 font-semibold rounded-full mx-auto">Recommendations</div>
                         <div className="flex flex-wrap justify-center mt-3">
                                 {
-                                    recommendPanel(appData.required_time) &&
+                                    recommendPanel(appData.required_time2) &&
                                     <div className="rounded-lg my-1 mx-1 flex flex-col w-[84px] xl:w-36 items-center px-2 bg-green-700 min-h-5 text-white">
                                         <div className="text-base text-center xl:text-lg">
                                         {
-                                            recommendPanel(appData.required_time)[0]
+                                            recommendPanel(appData.required_time2)[0]
                                         }
                                         </div>
                                         <div className="text-[8px] xl:text-xs text-center">
                                             {
-                                                recommendPanel(appData.required_time)[1]
+                                                recommendPanel(appData.required_time2)[1]
                                             }
                                         </div>
                                     </div>
