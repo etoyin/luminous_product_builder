@@ -8,7 +8,7 @@ function Index() {
   const [currentDragId, setCurrentDragId] = useState("");
   const [currentRemoveDragId, setCurrentRemoveDragId] = useState("");
 
-  const[showForm, setShowForm] = useState(false)
+  const[showForm, setShowForm] = useState(false);
 
   const [panelCounter, setPanelCounter] = useState(0);
   const [inverterCounter, setInverterCounter] = useState(0);

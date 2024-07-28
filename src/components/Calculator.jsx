@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Ratings from './data';
 import { recommendBattery, recommendInverter, recommendPanel } from './conditions';
+import FormC from './FormC';
 
 function Calculator() {
     console.log(Ratings);
@@ -111,8 +112,16 @@ function Calculator() {
             ]
         })
     };
+    const[showForm, setShowForm] = useState(false);
+    const close = () => {
+        setShowForm(false);
+    }
   return (
     <div>
+        {
+            showForm &&
+            <FormC close={close} appData={appData} />
+        }
       <div className="p-4 sm:p-10 font-quicksand">
         <div className="flex flex-wrap">
             <div className="w-full p-2 sm:p-5 md:w-7/12 xl:w-6/12 border border-gray-100 rounded-lg shadow-xl my-5 md:mr-10  bg-[#f1f2f4]">
@@ -419,6 +428,13 @@ function Calculator() {
                 </div>
             </div>
         </div>
+        
+        {
+            !isNaN(appData.required_time) && !isNaN(appData.load) && !isNaN(appData.night_power) &&
+            <div className="m-auto flex justify-center">
+                <button onClick={()=> setShowForm(true)} className="bg-blue-600 px-4 py-2 rounded-full font-bold text-white">Request Quotation</button>
+            </div>
+        }
       </div>
     </div>
   )

@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 
-import emailjs from 'emailjs-com';
-
-const SERVICE_ID = "service_6m4g25h";
-const TEMPLATE_ID = "template_g1khc67";
-const PUBLIC_KEY = "qYBtwCh8_GIe15Pwp";
 
 
-function Form(props) {
-    let capa = props.counters.inverterCounter * 5;
-    let batt = Math.round(props.counters.batteryCounter * 5.12)
-    let gen = Math.round(((props.counters.panelCounter * 3.5 * 545/1000) + Number.EPSILON) * 100) / 100;
+
+function FormC(props) {
+    // let capa = props.counters.inverterCounter * 5;
+    // let batt = Math.round(props.counters.batteryCounter * 5.12)
+    // let gen = Math.round(((props.counters.panelCounter * 3.5 * 545/1000) + Number.EPSILON) * 100) / 100;
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -20,9 +16,10 @@ function Form(props) {
         time: "",
         heard: "",
         
-        capacity: `${capa}kVA`,
-        power_gen: `${gen}kWp`,
-        backup: `${batt}hours`,
+        daily_power: `${props.appData.required_time} kWp`,
+        battery: `${props.appData.night_power} kWh`,
+        load: `${props.appData.load} kW`,
+        grid: `${props.appData.grid_time} kWp`,
         n_error: false,
         email_error: false,
 
@@ -56,23 +53,26 @@ function Form(props) {
             });
 
             
-            let message = `I would like to request the following quote 
-                            Hybrid Inverter Capacity: ${data.capacity}\n
-                            Solar Panel Capacity: ${data.power_gen}\n
-                            Battery Backup Capacity: ${data.backup}\n
-                            
-                            Below are my contact details: 
-                            WhatsApp Phone number: ${data.phone}.\n
-                            I will like to be contacted via ${data.reach} at ${data.time}
-                            
-                            I heard about Arnergy through ${data.heard}`
-        
+            let message = 
+                `
+                I would like to request the following quote 
+                Required Daily Power Generation: ${data.daily_power}\n
+                Required Solar Battery Capacity: ${data.battery}\n
+                Maximum Load you can connect to: ${data.load}\n
+                Hours of grid electricity in my location: ${data.grid}\n
+                
+                Below are my contact details: 
+                WhatsApp Phone number: ${data.phone}.\n
+                I will like to be contacted via ${data.reach} at ${data.time}
+                
+                I heard about Arnergy through ${data.heard}`
+            
             let formData = new FormData();
             formData.append("name", data.name);
             formData.append("email", data.email);
             formData.append("message", message);
-            formData.append("subject", '"Build Your Product" Quotation Request');
-        
+            formData.append("subject", 'Solar Calcualtor Quotation Request');
+            
             fetch("https://anergy-quotations.thekreativestack.com/submit_calculator_form.php", {
                 method: 'POST',
                 body: formData
@@ -83,6 +83,7 @@ function Form(props) {
                 console.log(result.message);
                 
             })
+            
             // console.log("kkkkkkkk");
         }
         else{
@@ -200,40 +201,52 @@ function Form(props) {
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
                             <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                                Hybrid Inverter Capacity <i className="ml-2 text-lg las la-bolt"></i>
+                                Required Daily Power Generation <i className="ml-2 text-lg las la-sun"></i>
+                                {/* <i class="las la-bolt"></i> */}
                             </label>
                             <input 
                                 disabled={true}
-                                value={data.capacity}
+                                value={data.daily_power}
                                 name="capacity"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque"/>
                         </div>
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
                             <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                Solar Panel Capacity <i className="ml-2 text-lg las la-solar-panel"></i>
+                                Required Solar Battery Capacity <i className="ml-2 text-lg las la-battery-half"></i>
                             </label>
                             <div class="relative">
                                 <input 
                                     disabled={true}
-                                    value={data.power_gen}
+                                    value={data.battery}
                                     name="power_gen"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque"/>
                             </div>
                         </div>
                         <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
-                        <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                            Battery Backup Capacity <i className="ml-2 text-lg las la-battery-half"></i>
-                        </label>
-                        <input 
-                            value={data.backup}
-                            name="backup"
-                            disabled={true}
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210"/>
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                                Maximum Load you can connect to <i className="ml-2 text-lg las la-cubes"></i>
+                            </label>
+                            <input 
+                                value={data.load}
+                                name="backup"
+                                disabled={true}
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210"/>
                         </div>
+                        
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                                Grid Electricity Time <i className="ml-2 text-lg las la-network-wired"></i>
+                            </label>
+                            <input 
+                                value={data.grid}
+                                name="backup"
+                                disabled={true}
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210"/>
+                        </div>
+                        <div class="w-full md:w-8/12 px-3">
+                            <label class="flex items-center uppercase h-10 tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                                 How did you hear about us?
                             </label>
                             <select 
@@ -270,4 +283,4 @@ function Form(props) {
   )
 }
 
-export default Form
+export default FormC
