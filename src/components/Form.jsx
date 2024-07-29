@@ -76,7 +76,7 @@ function Form(props) {
             // formData.append("name", data.name);
             // formData.append("email", data.email);
             formData.append("message", m);
-            formData.append("subject", 'Build Your Product Quotation Request');
+            formData.append("subject", 'Build Your Product Quotation Request!');
         
             fetch("https://anergy-quotations.thekreativestack.com/submit_build.php", {
                 method: 'POST',
