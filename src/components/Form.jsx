@@ -73,12 +73,12 @@ function Form(props) {
             `;
             
             let formData = new FormData();
-            formData.append("name", data.name);
-            formData.append("email", data.email);
+            // formData.append("name", data.name);
+            // formData.append("email", data.email);
             formData.append("message", m);
             formData.append("subject", 'Build Your Product Quotation Request');
         
-            fetch("https://anergy-quotations.thekreativestack.com/submit_calculator_form.php", {
+            fetch("https://anergy-quotations.thekreativestack.com/submit_build.php", {
                 method: 'POST',
                 body: formData
             })
