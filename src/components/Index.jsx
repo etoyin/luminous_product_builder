@@ -276,11 +276,12 @@ function Index() {
                     }</span>
                 </div>
               </div>
-              <div className="flex justify-center">
-                <button 
-                  onClick={handleClick}
-                  className="bg-blue-600 w-48 rounded-lg shadow-xl border text-white p-2">Request A Quote</button>
-              </div>
+              
+            </div>
+            <div className="flex justify-center mx-auto">
+              <button 
+                onClick={handleClick}
+                className="bg-blue-600 w-48 rounded-lg shadow-xl border text-white p-2">Request A Quote</button>
             </div>
           </div>
         </div>

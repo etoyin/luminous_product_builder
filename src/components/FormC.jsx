@@ -53,13 +53,41 @@ function FormC(props) {
             });
 
             
-            let message = 
-                `
-                I would like to request the following quote\nRequired Daily Power Generation: ${data.daily_power}\n Required Solar Battery Capacity: ${data.battery}\n Maximum Load you can connect to: ${data.load}\n Hours of grid electricity in my location: ${data.grid}\n Below are my contact details:\n WhatsApp Phone number: ${data.phone}.\n I will like to be contacted via ${data.reach} at ${data.time}\n I heard about Arnergy through ${data.heard}`
+            let message = `
+                <div style="margin:0; padding: 10px;  font-family:sans; font-size: large;">
+                    <div style="padding:5px 20px; font-weight: bold; text-align: center; margin: auto; width: fit-content; background-color: #034564; color: white;">
+                        <p>${data.name}</p>
+                        <p>${data.email} </p>
+                    </div>
+                    <div style="padding: 20px; margin: auto; width:700px;  color: #034564;">
+                        <p>I would like to request the following quote:</p>
+                        <ul style="line-height: 30px;">
+                        <li>Required Daily Power Generation: <span style="color:#e65858">${data.daily_power}</span></li>
+                        <li>Required Solar Battery Capacity: <span style="color:#e65858">${data.battery}</span></li>
+                        <li>Maximum Load you can connect to: <span style="color:#e65858">${data.load}</span></li>
+                        <li>Hours of grid electricity in my location: <span style="color:#e65858">${data.grid}</span></li>
+                        </ul>
+                        <p>Below are my contact details:</p> 
+                        <ul style="line-height: 30px;">
+                        <li>WhatsApp Phone number: <span style="color:#e65858">${data.phone}.</span></li>
+                        <li>I will like to be contacted via <span style="color:#e65858">${data.reach}</span> at <span style="color:#e65858">${data.time}\n </span></li>
+                        <li>I heard about Arnergy through <span style="color:#e65858">${data.heard}</span></li> 
+                        </ul>
+                    </div>
+                </div>
+            
+            `
             
             let formData = new FormData();
             formData.append("name", data.name);
             formData.append("email", data.email);
+            // formData.append("daily_power", data.daily_power);
+            // formData.append("battery", data.battery);
+            // formData.append("load", data.load);
+            // formData.append("grid", data.grid);
+            // formData.append("phone", data.phone);
+            // formData.append("time", data.reach);
+            // formData.append("heard", data.heard);
             formData.append("message", message);
             formData.append("subject", 'Solar Calcualtor Quotation Request');
             

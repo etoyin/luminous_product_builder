@@ -48,13 +48,34 @@ function Form(props) {
                 phone_error: false
             });
 
+            let m = `
+                <div style="margin:0; padding: 10px;  font-family:sans; font-size: large;">
+                    <div style="padding:5px 20px; font-weight: bold; text-align: center; margin: auto; width: fit-content; background-color: #034564; color: white;">
+                        <p>${data.name}</p>
+                        <p>${data.email} </p>
+                    </div>
+                    <div style="padding: 20px; margin: auto; width:700px;  color: #034564;">
+                        <p>I would like to request the following quote:</p>
+                        <ul style="line-height: 30px;">
+                        <li>Hybrid Inverter Capacity: <span style="color:#e65858">${data.capacity}</span></li>
+                        <li>Solar Panel Capacity: <span style="color:#e65858">${data.power_gen}</span></li>
+                        <li>Battery Backup Capacity: <span style="color:#e65858">${data.backup}</span></li>
+                        </ul>
+                        <p>Below are my contact details:</p> 
+                        <ul style="line-height: 30px;">
+                        <li>WhatsApp Phone number: <span style="color:#e65858">${data.phone}.</span></li>
+                        <li>I will like to be contacted via <span style="color:#e65858">${data.reach}</span> at <span style="color:#e65858">${data.time}\n </span></li>
+                        <li>I heard about Arnergy through <span style="color:#e65858">${data.heard}</span></li> 
+                        </ul>
+                    </div>
+                </div>
             
-            let message = `I would like to request the following quote\n Hybrid Inverter Capacity: ${data.capacity}\n Solar Panel Capacity: ${data.power_gen}\n Battery Backup Capacity: ${data.backup}\n Below are my contact details: WhatsApp Phone number: ${data.phone}.\n I will like to be contacted via ${data.reach} at ${data.time} I heard about Arnergy through ${data.heard}`
-
+            `;
+            
             let formData = new FormData();
             formData.append("name", data.name);
             formData.append("email", data.email);
-            formData.append("message", message);
+            formData.append("message", m);
             formData.append("subject", 'Build Your Product Quotation Request');
         
             fetch("https://anergy-quotations.thekreativestack.com/submit_calculator_form.php", {
